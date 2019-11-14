@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "onlinetaxmanagement", "onlinetaxmanagement\onlinetaxmanagement.csproj", "{E34E2078-56C3-4211-B12B-27C5583C88B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "onlinetaxmanagement.Tests", "onlinetaxmanagement.Tests\onlinetaxmanagement.Tests.csproj", "{F01D4F6B-9E62-4D42-8BA9-AB1250738B15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E34E2078-56C3-4211-B12B-27C5583C88B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E34E2078-56C3-4211-B12B-27C5583C88B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E34E2078-56C3-4211-B12B-27C5583C88B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E34E2078-56C3-4211-B12B-27C5583C88B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F01D4F6B-9E62-4D42-8BA9-AB1250738B15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F01D4F6B-9E62-4D42-8BA9-AB1250738B15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F01D4F6B-9E62-4D42-8BA9-AB1250738B15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F01D4F6B-9E62-4D42-8BA9-AB1250738B15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {560CDC12-AC90-4497-9829-4AA513357ACF}
+	EndGlobalSection
+EndGlobal

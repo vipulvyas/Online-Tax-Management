@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Tax Calculator";
+}
+
+<h2>Tax Calculator</h2>
+<div>
+    @using (Html.BeginForm("ComputeTax", "TaxCal", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <hr />
+        <div class="form-group">
+            @Html.Label("Assessment Year", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("year", new List<SelectListItem> {
+                    new SelectListItem {Text="2020-21",Value="0" },
+                    new SelectListItem {Text="2019-20",Value="1" },
+                    new SelectListItem {Text="2018-19",Value="2" },
+                    new SelectListItem {Text="2017-18",Value="3" }
+         }, "--Please Select One--")
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            @Html.Label("Tax Payer", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("taxpayer", new List<SelectListItem> {
+                   new SelectListItem {Text="Residential Individual",Value="0" },
+                   new SelectListItem {Text="HUF",Value="1" },
+                   new SelectListItem {Text="AOPs/BOI",Value="2" },
+                   new SelectListItem {Text="Domestics Company",Value="3" },
+                   new SelectListItem {Text="Foreign Commpany",Value="4" },
+                   new SelectListItem {Text="Firms",Value="5" },
+                   new SelectListItem {Text="LLP",Value="6" },
+                   new SelectListItem {Text="Co-operative Society",Value="7" }
+        }, "--Please Select One--")
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            @Html.Label("Male/Female/Senior Citizen ", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("status", new List<SelectListItem> {
+                    new SelectListItem {Text="Male",Value="0" },
+                    new SelectListItem {Text="Female",Value="1" },
+                    new SelectListItem {Text="Senior Citizen",Value="2" },
+                    new SelectListItem {Text="Super Senior Citizen",Value="3" }
+        }, "--Please Select One--")
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            @Html.Label(" Net Taxable Income ", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBox("taxableincome", null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Register" />
+            </div>
+        </div>
+    }
+</div>
+<div>
+    @Html.Label(" Net Taxable Income ", new { @class = "control-label" }) --->>> @ViewBag.taxableincome
+    <hr />
+    @Html.Label(" Income Tax After Relief ", new { @class = "control-label" }) --->>> @ViewBag.arincometax
+    <hr />
+    @Html.Label(" Surcharge ", new { @class = "control-label" }) --->>> @ViewBag.surcharge
+    <hr />
+    @Html.Label(" Education Cess ", new { @class = "control-label" }) --->>> @ViewBag.educationcess
+    <hr />
+    @Html.Label(" Total Tax Liability ", new { @class = "control-label" }) --->>> @ViewBag.totaltax
+
+
+</div>

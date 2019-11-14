@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Tax Management</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/Style.css")
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+</head>
+<body>
+    <header class="header">
+
+        <img src="~/Content/images/finallogo.png" class="imgq" style="height: 100px;width: 100px;" alt="" />
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <ul class="menu">
+            <li><a class="nav-link" style="color:white">Home </a></li>
+            <li> <a href="~/TaxCal" class="nav-link" style="color:white">Income Tax</a></li>
+            <li><a class="nav-link" style="color:white">scholarship</a></li>
+            <li><a class="nav-link" style="color:white">Campaign</a></li>
+            <li><a class="nav-link" style="color:white">About Us</a></li>
+        </ul>
+
+    </header>
+    <br /><br /><br /><br /><br />
+    @RenderBody()
+<footer class="my-bar my-padding-32 myfooter my-text-white">
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col" style="justify-content: center;">
+                <ul class="social-icons" style="list-style-type:none;">
+                   <li> <a href="http://www.facebook.com"><img src='~/Content/images/Facebook.png' style="width:50px;height:50px;border-radius:50%" /></a>
+                    <a href="http://www.twitter.com"><img src='~/Content/images/Twitter.png' style="width:50px;height:50px;border-radius:50%" /></a>
+                    <a href="http://www.linkedin.com"><img src='~/Content/images/Linkedin.png' style="width:50px;height:50px;border-radius:50%" /></a>
+                    <a href="http://www.instagram.com"><img src='~/Content/images/Instagram.png' style="width:50px;height:50px;border-radius:50%" /></a>
+                </li></ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Creators</h1>
+                <div class="about">
+                    <h3>Keval Talaviya<br>Shubham Vekariya<br>Vipul Vyas</h3>
+                </div>
+            </div>
+            <div class="col">
+                <h1>Contact Us</h1>
+                <br>
+                <div class="about">
+                    <i class="fa fa-envelope-square my-text-light-green my-large"></i><h4>cdccs@gmail.com</h4><br>
+                    <i class="fa fa-phone my-text-light-green my-large"></i>
+                    <h4> +91 9198238743</h4>
+                </div>
+            </div>
+            <div class="col">
+                <img src="~/Content/images/finallogo.png" style="height:200px;width:250px;" />
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+
+
+<!--<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+    -->
