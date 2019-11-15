@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TaxManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AdminInformation">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="260" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GSTINformation">
+    <Key>
+      <PropertyRef Name="Gid" />
+    </Key>
+    <Property Name="Gid" Type="Int32" Nullable="false" />
+    <Property Name="Uid" Type="Int32" Nullable="false" />
+    <Property Name="MRP" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="GST" Type="Decimal" Precision="6" Scale="0" Nullable="false" />
+    <Property Name="Bill" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="Flag" Type="Decimal" Precision="1" Scale="0" Nullable="false" />
+    <NavigationProperty Name="Registration" Relationship="Self.FK_GSTINformation_ToTable" FromRole="GSTINformation" ToRole="Registration" />
+  </EntityType>
+  <EntityType Name="Registration">
+    <Key>
+      <PropertyRef Name="Uid" />
+    </Key>
+    <Property Name="Uid" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="PanNumber" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="MobileNumber" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="260" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="BankName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="AccountNumber" Type="Decimal" Precision="14" Scale="0" Nullable="false" />
+    <Property Name="IFSC" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="GSTINformations" Relationship="Self.FK_GSTINformation_ToTable" FromRole="Registration" ToRole="GSTINformation" />
+    <NavigationProperty Name="TaxInformations" Relationship="Self.FK_TaxInformation_ToTable" FromRole="Registration" ToRole="TaxInformation" />
+  </EntityType>
+  <EntityType Name="TaxInformation">
+    <Key>
+      <PropertyRef Name="Tid" />
+    </Key>
+    <Property Name="Tid" Type="Int32" Nullable="false" />
+    <Property Name="Uid" Type="Int32" Nullable="false" />
+    <Property Name="Year" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="TotalIncome" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="TotalTax" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+    <NavigationProperty Name="Registration" Relationship="Self.FK_TaxInformation_ToTable" FromRole="TaxInformation" ToRole="Registration" />
+  </EntityType>
+  <Association Name="FK_GSTINformation_ToTable">
+    <End Role="Registration" Type="Self.Registration" Multiplicity="1" />
+    <End Role="GSTINformation" Type="Self.GSTINformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Registration">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="GSTINformation">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaxInformation_ToTable">
+    <End Role="Registration" Type="Self.Registration" Multiplicity="1" />
+    <End Role="TaxInformation" Type="Self.TaxInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Registration">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="TaxInformation">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TaxManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AdminInformations" EntityType="Self.AdminInformation" />
+    <EntitySet Name="GSTINformations" EntityType="Self.GSTINformation" />
+    <EntitySet Name="Registrations" EntityType="Self.Registration" />
+    <EntitySet Name="TaxInformations" EntityType="Self.TaxInformation" />
+    <AssociationSet Name="FK_GSTINformation_ToTable" Association="Self.FK_GSTINformation_ToTable">
+      <End Role="Registration" EntitySet="Registrations" />
+      <End Role="GSTINformation" EntitySet="GSTINformations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaxInformation_ToTable" Association="Self.FK_TaxInformation_ToTable">
+      <End Role="Registration" EntitySet="Registrations" />
+      <End Role="TaxInformation" EntitySet="TaxInformations" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

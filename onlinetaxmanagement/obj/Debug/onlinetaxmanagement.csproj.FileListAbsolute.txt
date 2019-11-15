@@ -81,3 +81,7 @@ C:\Users\vipul\source\repos\onlinetaxmanagement\onlinetaxmanagement\bin\AntiXssL
 C:\Users\vipul\source\repos\onlinetaxmanagement\onlinetaxmanagement\bin\HtmlSanitizationLibrary.dll
 C:\Users\vipul\source\repos\onlinetaxmanagement\onlinetaxmanagement\bin\AntiXssLibrary.xml
 C:\Users\vipul\source\repos\onlinetaxmanagement\onlinetaxmanagement\bin\HtmlSanitizationLibrary.xml
+C:\Users\vipul\source\repos\onlinetaxmanagement\onlinetaxmanagement\bin\EntityFramework.dll
+C:\Users\vipul\source\repos\onlinetaxmanagement\onlinetaxmanagement\bin\EntityFramework.SqlServer.dll
+C:\Users\vipul\source\repos\onlinetaxmanagement\onlinetaxmanagement\bin\EntityFramework.xml
+C:\Users\vipul\source\repos\onlinetaxmanagement\onlinetaxmanagement\bin\EntityFramework.SqlServer.xml

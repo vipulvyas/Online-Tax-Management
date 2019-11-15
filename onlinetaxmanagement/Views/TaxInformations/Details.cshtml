@@ -1,0 +1,58 @@
+﻿@model onlinetaxmanagement.Models.TaxInformation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TaxInformation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalIncome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalIncome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalTax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Registration.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Registration.FirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Tid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

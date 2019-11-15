@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TaxManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AdminInformation">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="nchar" MaxLength="260" Nullable="false" />
+    <Property Name="Email" Type="nchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GSTINformation">
+    <Key>
+      <PropertyRef Name="Gid" />
+    </Key>
+    <Property Name="Gid" Type="int" Nullable="false" />
+    <Property Name="Uid" Type="int" Nullable="false" />
+    <Property Name="MRP" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="GST" Type="numeric" Precision="6" Scale="0" Nullable="false" />
+    <Property Name="Bill" Type="image" Nullable="false" />
+    <Property Name="Flag" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Registration">
+    <Key>
+      <PropertyRef Name="Uid" />
+    </Key>
+    <Property Name="Uid" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="LastName" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="PanNumber" Type="nchar" MaxLength="11" Nullable="false" />
+    <Property Name="MobileNumber" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="Email" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nchar" MaxLength="260" Nullable="false" />
+    <Property Name="BankName" Type="nchar" MaxLength="30" Nullable="false" />
+    <Property Name="AccountNumber" Type="numeric" Precision="14" Scale="0" Nullable="false" />
+    <Property Name="IFSC" Type="nchar" MaxLength="11" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaxInformation">
+    <Key>
+      <PropertyRef Name="Tid" />
+    </Key>
+    <Property Name="Tid" Type="int" Nullable="false" />
+    <Property Name="Uid" Type="int" Nullable="false" />
+    <Property Name="Year" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="TotalIncome" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="TotalTax" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_GSTINformation_ToTable">
+    <End Role="Registration" Type="Self.Registration" Multiplicity="1" />
+    <End Role="GSTINformation" Type="Self.GSTINformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Registration">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="GSTINformation">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaxInformation_ToTable">
+    <End Role="Registration" Type="Self.Registration" Multiplicity="1" />
+    <End Role="TaxInformation" Type="Self.TaxInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Registration">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="TaxInformation">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TaxManagementModelStoreContainer">
+    <EntitySet Name="AdminInformation" EntityType="Self.AdminInformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GSTINformation" EntityType="Self.GSTINformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaxInformation" EntityType="Self.TaxInformation" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_GSTINformation_ToTable" Association="Self.FK_GSTINformation_ToTable">
+      <End Role="Registration" EntitySet="Registration" />
+      <End Role="GSTINformation" EntitySet="GSTINformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaxInformation_ToTable" Association="Self.FK_TaxInformation_ToTable">
+      <End Role="Registration" EntitySet="Registration" />
+      <End Role="TaxInformation" EntitySet="TaxInformation" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

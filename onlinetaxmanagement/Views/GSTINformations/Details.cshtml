@@ -1,0 +1,58 @@
+﻿@model onlinetaxmanagement.Models.GSTINformation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GSTINformation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MRP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MRP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GST)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GST)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bill)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bill)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Flag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Flag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Registration.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Registration.FirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Gid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
