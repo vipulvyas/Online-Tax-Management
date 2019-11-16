@@ -25,6 +25,7 @@
     <EntitySetMapping Name="Registrations">
       <EntityTypeMapping TypeName="TaxSystemModel.Registration">
         <MappingFragment StoreEntitySet="Registration">
+          <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
           <ScalarProperty Name="Uid" ColumnName="Uid" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />

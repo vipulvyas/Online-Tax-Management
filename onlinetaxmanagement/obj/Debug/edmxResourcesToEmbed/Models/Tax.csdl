@@ -16,7 +16,7 @@
     <Property Name="MRP" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
     <Property Name="Uid" Type="Int32" Nullable="false" />
     <Property Name="GST" Type="Decimal" Precision="6" Scale="0" Nullable="false" />
-    <Property Name="Bill" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="Bill" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
     <Property Name="Flag" Type="Decimal" Precision="1" Scale="0" Nullable="false" />
     <NavigationProperty Name="Registration" Relationship="Self.FK_GSTINformation_ToTable" FromRole="GSTINformation" ToRole="Registration" />
   </EntityType>
@@ -36,6 +36,7 @@
     <Property Name="IFSC" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
     <NavigationProperty Name="GSTINformations" Relationship="Self.FK_GSTINformation_ToTable" FromRole="Registration" ToRole="GSTINformation" />
     <NavigationProperty Name="TaxInformations" Relationship="Self.FK_TaxInformation_ToTable" FromRole="Registration" ToRole="TaxInformation" />
+    <Property Name="ResetPasswordCode" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="TaxInformation">
     <Key>

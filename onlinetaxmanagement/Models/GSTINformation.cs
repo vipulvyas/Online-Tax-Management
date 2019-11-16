@@ -18,7 +18,7 @@ namespace onlinetaxmanagement.Models
         public decimal MRP { get; set; }
         public int Uid { get; set; }
         public decimal GST { get; set; }
-        public byte[] Bill { get; set; }
+        public string Bill { get; set; }
         public decimal Flag { get; set; }
     
         public virtual Registration Registration { get; set; }

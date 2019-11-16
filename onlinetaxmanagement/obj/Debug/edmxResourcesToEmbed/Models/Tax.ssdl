@@ -16,7 +16,7 @@
     <Property Name="MRP" Type="numeric" Precision="8" Scale="0" Nullable="false" />
     <Property Name="Uid" Type="int" Nullable="false" />
     <Property Name="GST" Type="numeric" Precision="6" Scale="0" Nullable="false" />
-    <Property Name="Bill" Type="image" Nullable="false" />
+    <Property Name="Bill" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Flag" Type="numeric" Precision="1" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="Registration">
@@ -33,6 +33,7 @@
     <Property Name="BankName" Type="nchar" MaxLength="30" Nullable="false" />
     <Property Name="AccountNumber" Type="numeric" Precision="14" Scale="0" Nullable="false" />
     <Property Name="IFSC" Type="nchar" MaxLength="11" Nullable="false" />
+    <Property Name="ResetPasswordCode" Type="nchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="TaxInformation">
     <Key>

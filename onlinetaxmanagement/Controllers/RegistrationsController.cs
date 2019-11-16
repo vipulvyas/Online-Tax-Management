@@ -46,7 +46,7 @@ namespace onlinetaxmanagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Uid,FirstName,LastName,PanNumber,MobileNumber,Email,Password,BankName,AccountNumber,IFSC")] Registration registration)
+        public ActionResult Create([Bind(Include = "Uid,FirstName,LastName,PanNumber,MobileNumber,Email, Password,BankName,AccountNumber,IFSC")] Registration registration)
         {
             if (ModelState.IsValid)
             {

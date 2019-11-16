@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TaxSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TaxSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdminInformation">
           <Key>
             <PropertyRef Name="UserName" />
@@ -21,7 +21,7 @@
           <Property Name="MRP" Type="numeric" Precision="8" Scale="0" Nullable="false" />
           <Property Name="Uid" Type="int" Nullable="false" />
           <Property Name="GST" Type="numeric" Precision="6" Scale="0" Nullable="false" />
-          <Property Name="Bill" Type="image" Nullable="false" />
+          <Property Name="Bill" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Flag" Type="numeric" Precision="1" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="Registration">
@@ -38,6 +38,7 @@
           <Property Name="BankName" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="AccountNumber" Type="numeric" Precision="14" Scale="0" Nullable="false" />
           <Property Name="IFSC" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="ResetPasswordCode" Type="nchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="TaxInformation">
           <Key>
@@ -88,8 +89,7 @@
             <End Role="TaxInformation" EntitySet="TaxInformation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TaxSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -109,7 +109,7 @@
           <Property Name="MRP" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
           <Property Name="Uid" Type="Int32" Nullable="false" />
           <Property Name="GST" Type="Decimal" Precision="6" Scale="0" Nullable="false" />
-          <Property Name="Bill" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Bill" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Flag" Type="Decimal" Precision="1" Scale="0" Nullable="false" />
           <NavigationProperty Name="Registration" Relationship="Self.FK_GSTINformation_ToTable" FromRole="GSTINformation" ToRole="Registration" />
         </EntityType>
@@ -129,6 +129,7 @@
           <Property Name="IFSC" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="GSTINformations" Relationship="Self.FK_GSTINformation_ToTable" FromRole="Registration" ToRole="GSTINformation" />
           <NavigationProperty Name="TaxInformations" Relationship="Self.FK_TaxInformation_ToTable" FromRole="Registration" ToRole="TaxInformation" />
+          <Property Name="ResetPasswordCode" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="TaxInformation">
           <Key>
@@ -210,6 +211,7 @@
           <EntitySetMapping Name="Registrations">
             <EntityTypeMapping TypeName="TaxSystemModel.Registration">
               <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
                 <ScalarProperty Name="Uid" ColumnName="Uid" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />

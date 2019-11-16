@@ -31,6 +31,7 @@ namespace onlinetaxmanagement.Models
         public string BankName { get; set; }
         public decimal AccountNumber { get; set; }
         public string IFSC { get; set; }
+        public string ResetPasswordCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GSTINformation> GSTINformations { get; set; }

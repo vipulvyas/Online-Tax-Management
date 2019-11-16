@@ -17,6 +17,7 @@ namespace onlinetaxmanagement.Controllers
         // GET: TaxInformations
         public ActionResult Index()
         {
+           
             var taxInformations = db.TaxInformations.Include(t => t.Registration);
             return View(taxInformations.ToList());
         }
@@ -24,6 +25,7 @@ namespace onlinetaxmanagement.Controllers
         // GET: TaxInformations/Details/5
         public ActionResult Details(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

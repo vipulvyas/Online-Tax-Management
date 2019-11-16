@@ -1,0 +1,332 @@
+﻿@model onlinetaxmanagement.Models.GSTINformation
+
+@{
+    ViewBag.Title = "GST TAX RATES ON SOME ITEM";
+}
+<div>
+    @using (Html.BeginForm("Uploadfile", "GSTINformations", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+    <center>
+        <fieldset style="border:5px solid green;margin:2% 30%;background-color:pink;border-radius:15px" >
+        <div class="form-group">
+            @Html.Label(" Total Amount ", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MRP, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MRP, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(" GST Amount ", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GST, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GST, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Upload Bill", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                <input type="file" name="ImageFile" required />
+
+                @Html.EditorFor(model => model.Bill, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Bill, "", new { type = "file", @class = "text-danger" })
+
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.Flag, "1")
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Upload" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @ViewBag.message
+            </div>
+        </div>
+        </fieldset>
+    </center>
+    }
+
+</div>
+        
+<main class="container-fluid text-justify ">
+    <p><b>GST</b>&nbsp;is perhaps the biggest tax-related reform in India since Independence bringing uniformity in the taxation structure and eliminating the cascading of taxes that was levied in the past. The GST Council meets from time to time to revise the GST rates for various products. Several states and industries recommend reduction in GST tax rate for various items which are discussed in these meetings.</p>
+    <p><b>GST stands for Goods and Services Tax. Following are the various types of GST .</b></p>
+    <ul>
+        <li style="font-weight: 400;"><b>CGST –Central GST</b></li>
+        <li style="font-weight: 400;"><b>SGST –State GST</b></li>
+        <li style="font-weight: 400;"><b>IGST –Integrated GST</b></li>
+    </ul>
+    <p><span style="font-weight: 400;">At the time of GST intrhen Finance Minister Arun Jaitley said that the government wanted to keep the GST rates close to the original rates. But there were differences in case of some items because of the changes in the economy as well as customer preferences. Some commodities were kept in the high tax bracket (18-28%) but on scrutinizing the list, they found that these commodities should be considered as necessities and not luxuries. This is why the GST rates were revised for commodities such as notebooks, exercise books, </span></p>
+    <hr />
+    <div>
+        <h2><strong>GST Tax Rates on some common items</strong></h2>
+        <table class="table table-bordered my-4">
+            <tbody>
+                <tr>
+                    <td><b>Tax Rates</b></td>
+                    <td><b>Products</b></td>
+                </tr>
+                <tr>
+                    <td><span style="font-weight: 400;">0.25%</span></td>
+                    <td><span style="font-weight: 400;">Cut and semi-polished stones are included under this tax slab.</span></td>
+                </tr>
+                <tr>
+                    <td><span style="font-weight: 400;">5%</span></td>
+                    <td><span style="font-weight: 400;">Household necessities such as edible oil,&nbsp;sugar,&nbsp;spices, tea, and coffee (except instant) are included. Coal, Mishti/Mithai (Indian Sweets) and Life-saving drugs are also covered under this GST slab.</span></td>
+                </tr>
+                <tr>
+                    <td><span style="font-weight: 400;">12%</span></td>
+                    <td><span style="font-weight: 400;">This includes computers and processed food</span></td>
+                </tr>
+                <tr>
+                    <td><span style="font-weight: 400;">18%</span></td>
+                    <td><span style="font-weight: 400;">Hair oil, toothpaste and soaps, capital goods and industrial</span><span style="font-weight: 400;"><br> </span><span style="font-weight: 400;">intermediaries are covered in this slab.</span></td>
+                </tr>
+                <tr>
+                    <td><span style="font-weight: 400;">28%</span></td>
+                    <td><span style="font-weight: 400;">Luxury items such as small cars, consumer durables like AC and Refrigerators, premium cars, cigarettes and aerated drinks, High-end motorcycles&nbsp;are included here.</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p>Though edible items like sugar, tea and coffee are included in the 5% slab, milk does not attract any tax under the new GST regime. The idea behind this is to ensure that basic food items are available for everyone but instant food is kept out of this category.</p>
+    <ul><li>Basic household items like toothpaste and hair oil, which currently attract 28% tax, will be taxed at 18% only.</li><li>Sweets will also be taxable at 5%.</li><li>Tax rates on coal has also been reduced from 11.69% to just 5% in order to relieve the pressure on power industries.</li><li>GST also gives a major push to domestic industries as they will be able to procure seamless input credit for capital goods. Make in India campaign is set to flourish after this reform.</li></ul>
+
+    <hr />
+    <h3><strong>GST Rates on Goods</strong></h3>
+    <p>The government has proposed a 4-tier tax structure for all goods and services under the slabs- 5%, 12%, 18% and 28%. After the recent revision of GST rates, these are the commodities that fall under the four tax slabs along with those that do not attract any tax. Please note that only those commodities are included in this list whose rates have been revised in various council meetings.</p>
+    <p><b>UPDATE: </b><span style="font-weight: 400;">As per 37</span><span style="font-weight: 400;">th</span><span style="font-weight: 400;"> GST Council Meeting, cut and semi-polished stones will be taxed at 0.25% GST. This is a 5</span><span style="font-weight: 400;">th</span><span style="font-weight: 400;"> GST tier that only includes a few products.&nbsp;</span></p>
+    <h4><strong><u>No Tax</u></strong></h4>
+    <p>Apart from other items that enjoy zero GST tax rate, these are the commodities added to the list after 11th June rate revision –</p>
+    <table class="table table-bordered my-4">
+        <tbody>
+            <tr>
+                <td><span style="font-weight: 400;">Cashew nuts/cashew nuts in shell</span></td>
+                <td><span style="font-weight: 400;">Ice and snow</span></td>
+                <td><span style="font-weight: 400;">Bio gas</span></td>
+                <td><span style="font-weight: 400;">Insulin</span></td>
+                <td><span style="font-weight: 400;">Marble rubble</span></td>
+            </tr>
+            <tr>
+                <td><span style="font-weight: 400;">Aggarbatti and Kites</span></td>
+                <td><span style="font-weight: 400;">Accessories/parts for carriages designed for differently-abled individuals</span></td>
+                <td><span style="font-weight: 400;">Coir mats, matting and floor covering</span></td>
+                <td><span style="font-weight: 400;">Pawan Chakki that is Wind-based Atta Chakki</span></td>
+                <td><span style="font-weight: 400;">Natural cork</span></td>
+            </tr>
+            <tr>
+                <td><span style="font-weight: 400;">Postage or revenue stamps, stamp-postmarks, first-day covers, etc.</span></td>
+                <td><span style="font-weight: 400;">Numismatic coins</span></td>
+                <td><span style="font-weight: 400;">Braille paper, braille typewriters, braille watches, hearing aids and other appliances to compensate for a defect or disability</span></td>
+                <td><span style="font-weight: 400;">Fly-ash blocks</span></td>
+                <td><span style="font-weight: 400;">Walking sticks</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4><b>12% Tax Slab</b></h4>
+    <p><span style="font-weight: 400;">After the GST council meeting on 11th June, the following items were added to the 12% GST rates category-</span></p>
+    <table class="table table-bordered my-4">
+        <tbody>
+            <tr>
+                <td><span style="font-weight: 400;">Preparations of vegetables, fruits, nuts or other parts of plants, including pickle, murabba, chutney, jam, jelly</span></td>
+                <td><span style="font-weight: 400;">Ketchups, sauces and mustard sauce but excluding curry paste, mayonnaise and salad dressings, mixed condiments and mixed dressings</span></td>
+                <td><span style="font-weight: 400;">Bari made of pulses including mungodi</span></td>
+                <td><span style="font-weight: 400;">Menthol and menthol crystals, peppermint, fractionated/de-terpenated mentha oil, dementholised oil, Mentha piperita oil and spearmint oil</span></td>
+                <td><span style="font-weight: 400;">All diagnostic kits and reagents</span></td>
+            </tr>
+            <tr>
+                <td><span style="font-weight: 400;">Plastic beads</span></td>
+                <td><span style="font-weight: 400;">Exercise books and note books</span></td>
+                <td><span style="font-weight: 400;">Glasses for corrective spectacles and flint buttons</span></td>
+                <td><span style="font-weight: 400;">Spoons, forks, ladles, skimmers, cake servers, fish knives, tongs</span></td>
+                <td><span style="font-weight: 400;">Fixed Speed Diesel Engines</span></td>
+            </tr>
+            <tr>
+                <td><span style="font-weight: 400;">Two-way radio (Walkie talkie) used by defence, police and paramilitary forces etc.</span></td>
+                <td><span style="font-weight: 400;">Intraocular lens</span></td>
+                <td><span style="font-weight: 400;">Corrective spectacles</span></td>
+                <td><span style="font-weight: 400;">Playing cards, chess board, carom board and other board games, like ludo, etc.</span></td>
+                <td><span style="font-weight: 400;">Debagged/roughly squared cork</span></td>
+            </tr>
+            <tr>
+                <td><span style="font-weight: 400;">Items manufactured from natural cork</span></td>
+                <td><span style="font-weight: 400;">Agglomerated cork</span></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4><b>18% Tax Slab</b></h4>
+    <p><span style="font-weight: 400;">The items mentioned below have been added to the 18% GST tax rate slab among the other existing items-</span></p>
+    <table class="table table-bordered my-4">
+        <tbody>
+            <tr>
+                <td><span style="font-weight: 400;">Kajal pencil sticks</span></td>
+                <td><span style="font-weight: 400;">Dental wax</span></td>
+                <td><span style="font-weight: 400;">Plastic Tarpaulin</span></td>
+                <td><span style="font-weight: 400;">School satchels and bags other than of leather or composition leather; toilet cases, Hand bags and shopping bags of artificial plastic material, cotton or jute; Handbags of other materials excluding wicker work or basket work</span></td>
+                <td><span style="font-weight: 400;">Headgear and parts thereof</span></td>
+            </tr>
+            <tr>
+                <td><span style="font-weight: 400;">Precast Concrete Pipes</span></td>
+                <td><span style="font-weight: 400;">Salt Glazed Stone Ware Pipes</span></td>
+                <td><span style="font-weight: 400;">Aluminium foil</span></td>
+                <td><span style="font-weight: 400;">All goods, including hooks and eyes</span></td>
+                <td><span style="font-weight: 400;">Rear Tractor tyres and rear tractor tyre tubes</span></td>
+            </tr>
+            <tr>
+                <td><span style="font-weight: 400;">Rear Tractor wheel rim, tractor centre housing, tractor housing transmission, tractor support front axle</span></td>
+                <td><span style="font-weight: 400;">Weighing Machinery other than electric or electronic weighing machinery</span></td>
+                <td><span style="font-weight: 400;">Printers other than multifunction printers</span></td>
+                <td><span style="font-weight: 400;">Ball bearing, Roller Bearings, Parts &amp; related accessories</span></td>
+                <td>&nbsp;<p></p><p><span style="font-weight: 400;">Transformers Industrial Electronics</span></p></td>
+            </tr>
+            <tr>
+                <td><span style="font-weight: 400;">Electrical Transformer</span></td>
+                <td><span style="font-weight: 400;">Static Converters (UPS)</span></td>
+                <td><span style="font-weight: 400;">CCTV including CCTV with video recorders</span></td>
+                <td><span style="font-weight: 400;">Set top Box for TV</span></td>
+                <td><span style="font-weight: 400;">Computer monitors not exceeding 17 inches</span></td>
+            </tr>
+            <tr>
+                <td><span style="font-weight: 400;">Electrical Filaments or discharge lamps</span></td>
+                <td><span style="font-weight: 400;">Winding Wires, Coaxial cables and Optical Fiber</span></td>
+                <td><span style="font-weight: 400;">Perforating or stapling machines (staplers), pencil sharpening machines</span></td>
+                <td><span style="font-weight: 400;">Baby carriages</span></td>
+                <td><span style="font-weight: 400;">Instruments for measuring length, for use in the hand (for example, measuring rods and tapes, micrometers, callipers)</span></td>
+            </tr>
+            <tr>
+                <td><span style="font-weight: 400;">Bamboo furniture</span></td>
+                <td><span style="font-weight: 400;">Swimming pools and paddling pools</span></td>
+                <td><span style="font-weight: 400;">Televisions/Monitors (upto 32 inches)</span></td>
+                <td><span style="font-weight: 400;">Power banks powered by Lithium-ion batteries</span></td>
+                <td><span style="font-weight: 400;">Sports goods, games consoles and related items with HS code 9504</span></td>
+            </tr>
+            <tr>
+                <td><span style="font-weight: 400;">All items with HS code 8483 including gear boxes, transmission cranks and pulleys</span></td>
+                <td><span style="font-weight: 400;">Used or retreaded pneumatic rubber tires</span></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4><b>28% Tax Slab</b></h4>
+    <p><span style="font-weight: 400;">The council meeting was held to ‘reduce’ the tax rates on certain items based on customer preferences. Hence, no additional items were added to the highest GST rates slab of 28%.</span></p>
+    <p><span style="font-weight: 400;">*The GST rates for various products are subject to change from time to time without prior information.</span></p>
+    <hr />
+    <h3><b>GST Rates on Services</b></h3>
+    <p><span style="font-weight: 400;">Government has also imposed GST on Services with the same 4-tier tax structure as of goods. GST rates on services comprising of 5%,&nbsp; 12%, 18% and 28% comes with various pros and cons for the consumers. However, government has exempted healthcare and educational services from the purview of the GST.</span></p>
+    <p><span style="font-weight: 400;">The Goods and Services Tax council has passed the rate slabs at NIL, 5%, 12%, 18%, 28%. Some of the services categorized under different slabs are mentioned below :</span></p>
+    <h4><b>Nil GST</b></h4>
+    <ul>
+        <li style="font-weight: 400;"><span style="font-weight: 400;">Chargeable services offered on Basic Savings Bank Deposit (BSBD) account opened under the PMJDY (Pradhan Mantri Jan Dhan Yojana)</span></li>
+        <li style="font-weight: 400;"><span style="font-weight: 400;">Hotel accommodation for transaction value per unit per day being Rs. 1000 or less</span></li>
+    </ul>
+
+    <h4><b>5% Tax Slab</b></h4>
+    <table class="table table-bordered my-4">
+        <tbody>
+            <tr>
+                <td><span style="font-weight: 400;">Working for printing of newspapers</span></td>
+                <td><span style="font-weight: 400;">Goods transported in a vessel from outside India</span></td>
+                <td><span style="font-weight: 400;">Renting a motor cab without fuel cost</span></td>
+                <td><span style="font-weight: 400;">Transport services in AC contract/stage or radio taxi</span></td>
+                <td><span style="font-weight: 400;">Transport by air (scheduled)/air travel for purpose of pilgrimage via chartered/non-scheduled flights</span></td>
+            </tr>
+            <tr>
+                <td><span style="font-weight: 400;">Tour operator services</span></td>
+                <td><span style="font-weight: 400;">Leasing of aircrafts</span></td>
+                <td><span style="font-weight: 400;">Print media ad space</span></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4><b>12% Tax Slab</b></h4>
+    <table class="table table-bordered my-4">
+        <tbody>
+            <tr>
+                <td><span style="font-weight: 400;">Rail transportation of goods in containers from a third party other than Indian Railways</span></td>
+                <td><span style="font-weight: 400;">Air travel excluding economy</span></td>
+                <td><span style="font-weight: 400;">Food /drinks at restaurants without AC/heating or liquor license</span></td>
+                <td><span style="font-weight: 400;">Renting of accommodation for more than Rs.1000 and less than Rs.2500 per day</span></td>
+                <td><span style="font-weight: 400;">Railway wagons, coaches, rolling stock (without refund of accumulated Input Tax Credit/ITC)</span></td>
+            </tr>
+            <tr>
+                <td><span style="font-weight: 400;">Construction of building for the purpose of sale</span></td>
+                <td><span style="font-weight: 400;">IP rights on a temporary basis</span></td>
+                <td><span style="font-weight: 400;">Movie Tickets less than or equal to Rs. 100</span></td>
+                <td><span style="font-weight: 400;">Chit fund services by foremen</span></td>
+                <td><span style="font-weight: 400;">Hotel accommodation for transaction value per unit per day ranging between Rs. 1001 to 7500</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><b style="font-size: 24px;">18% Tax Slab<br> </b></p>
+    <table class="table table-bordered  my-4">
+        <tbody>
+            <tr>
+                <td><span style="font-weight: 400;">Food/drinks at restaurants with liquor license</span></td>
+                <td><span style="font-weight: 400;">Food /drinks at restaurants with AC/heating</span></td>
+                <td><span style="font-weight: 400;">Outdoor catering</span></td>
+                <td><span style="font-weight: 400;">Renting for accommodation for more than Rs.2500 but less than Rs.5000 per day</span></td>
+                <td><span style="font-weight: 400;">Hotel accommodation for transaction value per unit per day being Rs. 7501 or more</span></td>
+            </tr>
+            <tr>
+                <td><span style="font-weight: 400;">Circus, Indian classical, folk, theatre, drama</span></td>
+                <td><span style="font-weight: 400;">Supply of works contract</span></td>
+                <td><span style="font-weight: 400;">Movie Tickets over Rs. 100</span></td>
+                <td><span style="font-weight: 400;">Supply of food, shamiyana, and party arrangement</span></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4><b>28% Tax Slab</b></h4>
+    <table class="table table-bordered  my-4">
+        <tbody>
+            <tr>
+                <td><span style="font-weight: 400;">Entertainment events-amusement facility, water parks, theme parks, joy rides, merry-go-round, race course, go-carting, casinos, ballet, sporting events like IPL</span></td>
+                <td><span style="font-weight: 400;">Race club services</span></td>
+                <td><span style="font-weight: 400;">Gambling</span></td>
+            </tr>
+            <tr>
+                <td><span style="font-weight: 400;">Food/drinks at AC 5-star hotels</span></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+    <h3><strong>GST on Loans and Advances</strong></h3>
+    <p>Earlier Service Tax was levied on Loans which has now been replaced by GST which would now be levied on loans. The rate of Service Tax was 15% whereas the rate of GST is 18%. A lot of people are of the opinion that the effective cost of having a loan would increase as the rate of GST is 3% higher than the rate of Service Tax. Several people are of the opinion that their EMI’s would increase as the rate has been increased by 3%. However, this is not the case as GST is not levied on repayment of loan or on payment of Interest on Loan.</p>
+    <p>GST is only levied on the processing charges and any other charges paid to the bank excluding the principal repayment and interest payment. These other charges include the Loan Processing Fees, Loan Prepayment Charges and other charges, if any. As a major chunk of the loan repayment comprises of principal repayment and interest payment, the impact of GST on Loans would be very negligible. The impact of GST on Home Loans and Personal Loans has been explained below for a much better understanding of the impact.</p>
+    <p><strong>Mentioned below are the important loans and their GST rates:</strong></p>
+    <p>(a) Personal Loan- <strong>18%</strong></p>
+    <p>(b) Home Loans- <strong>18%</strong></p>
+    <p>(c) Car Loan<strong>– 18%</strong></p>
+    <hr />
+    <h3><b>GST on Cars</b></h3>
+    <p><span style="font-weight: 400;">Subsequent to bringing cars under the GST regime, the GST rate on cars has been fixed at 28% for all personal use vehicles featuring a petrol or diesel driven engine. However, in addition to GST, a composition cess is also applicable to cars over and above the GST Rate. Thus the overall tax rate applicable to vehicles under GST ranges from 29% to 50%. Lower rates of taxation are however applicable to cars driven by cleaner technologies such as fuel cells (including hydrogen fuel cell) and electric vehicles.</span><span style="font-weight: 400;">Know more about GST on cars</span></p>
+    <hr />
+    <h3><b>GST on Gold</b></h3>
+    <p><span style="font-weight: 400;">Subsequent to introduction of GST on items made from gold such as gold jewelry, the current GST rate on gold is 3%. However, a 5% GST rate is applicable to making charges applied to gold jewelry in case the manufacturing is outsourced to a job worker. This can however, be charged as</span> <span style="font-weight: 400;">input tax credit (ITC)</span><span style="font-weight: 400;"> by the jeweler and only a 3% GST charge is applied to the final bill paid by the purchaser of gold jewelry items.</span><span style="font-weight: 400;">Know more about GST on Gold and impact of GST on the gold industry</span></p>
+    <hr />
+    <h3><b>GST On Real Estate</b></h3>
+    <p><span style="font-weight: 400;">GST is applicable to real estate purchases only if you are purchasing an under construction property. The GST rate applicable to such commercial or residential transactions is 12% till 31st March 2019. From 1st April, the applicable GST Rates on residential real estate will be 5% for non-affordable housing properties and 1% for affordable housing properties. No GST is applicable in case you are purchasing a ready to move in property. Additionally, different GST rates are applicable to various building materials used in the construction of houses/flats. This can range from 5% (sand, marble rubble, etc.) to 28% (cement, etc.).</span><span style="font-weight: 400;">Know more about GST impact on real estate in India</span></p>
+    <hr />
+    <h3><b>GST on Food</b></h3>
+    <p><span style="font-weight: 400;">Food items especially fresh food mostly carry a Nil GST rate. However, packaged food stuff and semi-processed/processed foods do feature GST rates starting from 5% up to 18%. While no food stuff are currently included in the highest 28% GST bracket, the 18% rate of GST is applicable to some common food products such as chocolates as well as baked goods such as cakes.</span><span style="font-weight: 400;">Know more about applicable GST on Food</span></p>
+
+</main>
+

@@ -9,11 +9,23 @@ namespace TaxApp.Controllers
     public class TaxCalController : Controller
     {
         // GET: TaxCal
-        public ActionResult Index()
+        
+            public ActionResult Index()
+            {
+                if (Session["PanNumber"] != null)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Index","Login");
+                }
+            }
+
+        public ActionResult Incometaxinfo()
         {
             return View();
         }
-
         [HttpPost]
         public ActionResult ComputeTax()
         {

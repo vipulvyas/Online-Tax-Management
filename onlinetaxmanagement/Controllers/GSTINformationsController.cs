@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -17,10 +18,39 @@ namespace onlinetaxmanagement.Controllers
         // GET: GSTINformations
         public ActionResult Index()
         {
+            if (Session["PanNumber"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
             var gSTINformations = db.GSTINformations.Include(g => g.Registration);
             return View(gSTINformations.ToList());
         }
 
+        [HttpPost]
+        public ActionResult UploadFile(HttpPostedFileBase billfile)
+        {
+            try
+            {
+                if (billfile.ContentLength > 0)
+                {
+
+                    string _FileName = Path.GetFileName(billfile.FileName);
+                    string _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _FileName);
+                    billfile.SaveAs(_path);
+                }
+                ViewBag.Message = "File Uploaded Successfully!!";
+                return View("Gstrate");
+            }
+            catch
+            {
+                ViewBag.Message = "File upload failed!!";
+                return View("Gstrate");
+            }
+        }
         // GET: GSTINformations/Details/5
         public ActionResult Details(int? id)
         {
@@ -127,6 +157,18 @@ namespace onlinetaxmanagement.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Gstrate()
+        {
+            if (Session["PanNumber"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
     }
 }
