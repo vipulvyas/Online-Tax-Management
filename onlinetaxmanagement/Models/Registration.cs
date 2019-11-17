@@ -25,13 +25,14 @@ namespace onlinetaxmanagement.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PanNumber { get; set; }
-        public decimal MobileNumber { get; set; }
+        public string MobileNumber { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string BankName { get; set; }
-        public decimal AccountNumber { get; set; }
+        public string AccountNumber { get; set; }
         public string IFSC { get; set; }
         public string ResetPasswordCode { get; set; }
+        public Nullable<int> Flag { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GSTINformation> GSTINformations { get; set; }

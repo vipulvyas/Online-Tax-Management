@@ -16,7 +16,7 @@ namespace onlinetaxmanagement.Models
     {
         public int Tid { get; set; }
         public int Uid { get; set; }
-        public decimal Year { get; set; }
+        public string Year { get; set; }
         public string Status { get; set; }
         public decimal TotalIncome { get; set; }
         public decimal TotalTax { get; set; }

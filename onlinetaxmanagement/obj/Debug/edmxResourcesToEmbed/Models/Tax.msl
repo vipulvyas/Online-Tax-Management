@@ -4,6 +4,7 @@
     <EntitySetMapping Name="AdminInformations">
       <EntityTypeMapping TypeName="TaxSystemModel.AdminInformation">
         <MappingFragment StoreEntitySet="AdminInformation">
+          <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Email" ColumnName="Email" />
@@ -18,13 +19,13 @@
           <ScalarProperty Name="Uid" ColumnName="Uid" />
           <ScalarProperty Name="GST" ColumnName="GST" />
           <ScalarProperty Name="Bill" ColumnName="Bill" />
-          <ScalarProperty Name="Flag" ColumnName="Flag" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Registrations">
       <EntityTypeMapping TypeName="TaxSystemModel.Registration">
         <MappingFragment StoreEntitySet="Registration">
+          <ScalarProperty Name="Flag" ColumnName="Flag" />
           <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
           <ScalarProperty Name="Uid" ColumnName="Uid" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />

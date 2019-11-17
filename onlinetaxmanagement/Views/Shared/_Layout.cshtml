@@ -19,7 +19,41 @@
 
 </head>
 <body>
-    @if (Session["PanNumber"] == null)
+    @if (Session["Admin"] != null)
+    {
+        <header class="header">
+
+            <img src="~/Content/images/finallogo.png" class="imgq" style="height: 100px;width: 100px;" alt="" />
+            <input class="menu-btn" type="checkbox" id="menu-btn" />
+            <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+            <ul class="menu">
+                <li> <a href="~/AdminInformations/IncomeTaxInformation" class="nav-link" style="color:white;font-size:20px;font-family: 'Changa',cursive;">Income Tax</a></li>
+                <li><a href="~/AdminInformations/Search" class="nav-link" style="color:white;font-size:20px;font-family: 'Changa',cursive;">GST</a></li>
+                <li><a href="~/AdminInformations/Logout" class="nav-link" style="color:white;font-size:20px;font-family: 'Changa',cursive;">Logout</a></li>
+            </ul>
+
+        </header>
+    }
+    @if (Session["PanNumber"] != null)
+
+    {
+        <header class="header">
+
+            <img src="~/Content/images/finallogo.png" class="imgq" style="height: 100px;width: 100px;" alt="" />
+            <input class="menu-btn" type="checkbox" id="menu-btn" />
+            <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+            <ul class="menu">
+                <li><a href="~/Home" class="nav-link" style="color:white;font-size:20px;font-family: 'Changa',cursive;">Home </a></li>
+                <li> <a href="~/TaxCal" class="nav-link" style="color:white;font-size:20px;font-family: 'Changa',cursive;">Income Tax</a></li>
+                <li><a href="~/GSTInformations/Gstrate" class="nav-link" style="color:white;font-size:20px;font-family: 'Changa',cursive;">GST</a></li>
+
+                <li><a href="~/Login/Logout" class="nav-link" style="color:white;font-size:20px;font-family: 'Changa',cursive;">Logout</a></li>
+            </ul>
+
+        </header>
+    }
+
+    @if (Session["PanNumber"] == null && Session["Admin"] == null)
     {
         <header class="header">
 
@@ -37,23 +71,7 @@
 
         </header>
     }
-    else
-    {
-        <header class="header">
 
-            <img src="~/Content/images/finallogo.png" class="imgq" style="height: 100px;width: 100px;" alt="" />
-            <input class="menu-btn" type="checkbox" id="menu-btn" />
-            <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-            <ul class="menu">
-                <li><a href="~/Home" class="nav-link" style="color:white;font-size:20px;font-family: 'Changa',cursive;">Home </a></li>
-                <li> <a href="~/TaxCal" class="nav-link" style="color:white;font-size:20px;font-family: 'Changa',cursive;">Income Tax</a></li>
-                <li><a href="~/GSTInformations/Gstrate" class="nav-link" style="color:white;font-size:20px;font-family: 'Changa',cursive;">GST</a></li>
-
-                <li><a href="~/Login/Logout" class="nav-link" style="color:white;font-size:20px;font-family: 'Changa',cursive;">Logout</a></li>
-            </ul>
-
-        </header>
-    }
     <br /><br /><br /><br />
     @RenderBody()
     <footer class="my-bar my-padding-32 myfooter my-text-white">

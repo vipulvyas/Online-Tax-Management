@@ -7,17 +7,17 @@
     <Property Name="UserName" Type="nchar" MaxLength="20" Nullable="false" />
     <Property Name="Password" Type="nchar" MaxLength="260" Nullable="false" />
     <Property Name="Email" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="ResetPasswordCode" Type="nchar" MaxLength="260" />
   </EntityType>
   <EntityType Name="GSTINformation">
     <Key>
       <PropertyRef Name="Gid" />
     </Key>
     <Property Name="Gid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MRP" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="MRP" Type="numeric" Precision="8" Scale="0" />
     <Property Name="Uid" Type="int" Nullable="false" />
-    <Property Name="GST" Type="numeric" Precision="6" Scale="0" Nullable="false" />
-    <Property Name="Bill" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="Flag" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="GST" Type="numeric" Precision="6" Scale="0" />
+    <Property Name="Bill" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Registration">
     <Key>
@@ -27,13 +27,14 @@
     <Property Name="FirstName" Type="nchar" MaxLength="25" Nullable="false" />
     <Property Name="LastName" Type="nchar" MaxLength="15" Nullable="false" />
     <Property Name="PanNumber" Type="nchar" MaxLength="11" Nullable="false" />
-    <Property Name="MobileNumber" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="MobileNumber" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="Email" Type="nchar" MaxLength="50" Nullable="false" />
     <Property Name="Password" Type="nchar" MaxLength="260" Nullable="false" />
     <Property Name="BankName" Type="nchar" MaxLength="30" Nullable="false" />
-    <Property Name="AccountNumber" Type="numeric" Precision="14" Scale="0" Nullable="false" />
+    <Property Name="AccountNumber" Type="nchar" MaxLength="14" Nullable="false" />
     <Property Name="IFSC" Type="nchar" MaxLength="11" Nullable="false" />
     <Property Name="ResetPasswordCode" Type="nchar" MaxLength="100" />
+    <Property Name="Flag" Type="int" />
   </EntityType>
   <EntityType Name="TaxInformation">
     <Key>
@@ -41,7 +42,7 @@
     </Key>
     <Property Name="Tid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Uid" Type="int" Nullable="false" />
-    <Property Name="Year" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="Year" Type="nchar" MaxLength="4" Nullable="false" />
     <Property Name="Status" Type="nchar" MaxLength="25" Nullable="false" />
     <Property Name="TotalIncome" Type="numeric" Precision="8" Scale="0" Nullable="false" />
     <Property Name="TotalTax" Type="numeric" Precision="8" Scale="0" Nullable="false" />

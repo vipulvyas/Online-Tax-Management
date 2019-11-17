@@ -15,11 +15,10 @@ namespace onlinetaxmanagement.Models
     public partial class GSTINformation
     {
         public int Gid { get; set; }
-        public decimal MRP { get; set; }
+        public Nullable<decimal> MRP { get; set; }
         public int Uid { get; set; }
-        public decimal GST { get; set; }
+        public Nullable<decimal> GST { get; set; }
         public string Bill { get; set; }
-        public decimal Flag { get; set; }
     
         public virtual Registration Registration { get; set; }
     }

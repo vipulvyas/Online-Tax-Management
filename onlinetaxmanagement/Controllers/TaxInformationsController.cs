@@ -17,9 +17,16 @@ namespace onlinetaxmanagement.Controllers
         // GET: TaxInformations
         public ActionResult Index()
         {
-           
-            var taxInformations = db.TaxInformations.Include(t => t.Registration);
-            return View(taxInformations.ToList());
+            if (Session["PanNumber"] != null)
+            {
+                var taxInformations = db.TaxInformations.Include(t => t.Registration);
+                return View(taxInformations.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            
         }
 
         // GET: TaxInformations/Details/5

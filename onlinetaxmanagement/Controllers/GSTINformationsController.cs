@@ -78,7 +78,7 @@ namespace onlinetaxmanagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Gid,MRP,Uid,GST,Bill,Flag")] GSTINformation gSTINformation)
+        public ActionResult Create([Bind(Include = "Gid,MRP,Uid,GST,Bill")] GSTINformation gSTINformation)
         {
             if (ModelState.IsValid)
             {

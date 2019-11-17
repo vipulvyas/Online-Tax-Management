@@ -4,9 +4,11 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using onlinetaxmanagement.Models;
+using RegistrationAndLogin.Models;
 
 namespace onlinetaxmanagement.Controllers
 {
@@ -17,111 +19,223 @@ namespace onlinetaxmanagement.Controllers
         // GET: AdminInformations
         public ActionResult Index()
         {
-            return View(db.AdminInformations.ToList());
+            return View();
         }
-
-        // GET: AdminInformations/Details/5
-        public ActionResult Details(string id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(AdminInformation reg)
         {
-            if (id == null)
+            if (ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                using (TaxSystemEntities1 db = new TaxSystemEntities1())
+                {
+                    var obj = db.AdminInformations.Where(a => a.UserName.Equals(reg.UserName) && a.Password.Equals(reg.Password)).FirstOrDefault();
+                    if (obj != null)
+                    {
+                        Session["Admin"] = obj.UserName.ToString();
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
             }
-            AdminInformation adminInformation = db.AdminInformations.Find(id);
-            if (adminInformation == null)
-            {
-                return HttpNotFound();
-            }
-            return View(adminInformation);
+            ViewBag.Message = "Invalid User Name or Password";
+            // Response.Write("<script>alert(' Invalid PanNumber or Password')</script>");
+            return View(reg);
         }
 
-        // GET: AdminInformations/Create
-        public ActionResult Create()
+        public ActionResult Logout()
+        {
+            if (Session["Admin"] != null)
+            {
+                Session["Admin"] = null;
+            }
+            else
+            {
+                return RedirectToAction("Index", "AdminInformations");
+
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
+        public ActionResult ForgotPassword()
         {
             return View();
         }
-
-        // POST: AdminInformations/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserName,Password,Email")] AdminInformation adminInformation)
+        [NonAction]
+        public void SendVerificationLinkEmail(string emailID, string activationCode, string emailFor = "VerifyAccount")
         {
-            if (ModelState.IsValid)
+            var verifyUrl = "/AdminInformations/" + emailFor + "/" + activationCode;
+            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
+
+            var fromEmail = new MailAddress("taxbazar001@gmail.com", "TaxBazar");
+            var toEmail = new MailAddress(emailID);
+            var fromEmailPassword = "@taxbazar.com"; // Replace with actual password
+
+            string subject = "";
+            string body = "";
+            if (emailFor == "VerifyAccount")
             {
-                db.AdminInformations.Add(adminInformation);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                subject = "Your account is successfully created!";
+                body = "<br/><br/>We are excited to tell you that your Dotnet Awesome account is" +
+                    " successfully created. Please click on the below link to verify your account" +
+                    " <br/><br/><a href='" + link + "'>" + link + "</a> ";
+            }
+            else if (emailFor == "ResetPassword")
+            {
+                subject = "Reset Password";
+                body = "Hi,<br/>br/>We got request for reset your account password. Please click on the below link to reset your password" +
+                    "<br/><br/><a href=" + link + ">Reset Password link</a>";
             }
 
-            return View(adminInformation);
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+                smtp.Send(message);
         }
 
-        // GET: AdminInformations/Edit/5
-        public ActionResult Edit(string id)
+        [HttpPost]
+        public ActionResult ForgotPassword(string EmailID)
         {
-            if (id == null)
+            //Verify Email ID
+            //Generate Reset password link 
+            //Send Email 
+            string message = "";
+            bool status = false;
+
+            using (TaxSystemEntities1 dc = new TaxSystemEntities1())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var account = dc.AdminInformations.Where(a => a.Email == EmailID).FirstOrDefault();
+                if (account != null)
+                {
+                    //Send email for reset password
+                    string resetCode = Guid.NewGuid().ToString();
+                    SendVerificationLinkEmail(account.Email, resetCode, "ResetPassword");
+                    account.ResetPasswordCode = resetCode;
+                    //This line I have added here to avoid confirm password not match issue , as we had added a confirm password property 
+                    //in our model class in part 1
+                    dc.Configuration.ValidateOnSaveEnabled = false;
+                    dc.SaveChanges();
+                    message = "Reset password link has been sent to your email id.";
+                }
+                else
+                {
+                    message = "Account not found";
+                }
             }
-            AdminInformation adminInformation = db.AdminInformations.Find(id);
-            if (adminInformation == null)
+            ViewBag.Message = message;
+            return View();
+        }
+        public ActionResult ResetPassword(string id)
+        {
+            //Verify the reset password link
+            //Find account associated with this link
+            //redirect to reset password page
+            if (string.IsNullOrWhiteSpace(id))
             {
                 return HttpNotFound();
             }
-            return View(adminInformation);
-        }
 
-        // POST: AdminInformations/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+            using (TaxSystemEntities1 dc = new TaxSystemEntities1())
+            {
+                var user = dc.AdminInformations.Where(a => a.ResetPasswordCode == id).FirstOrDefault();
+                if (user != null)
+                {
+                    ResetPasswordModel model = new ResetPasswordModel();
+                    model.ResetCode = id;
+                    return View(model);
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserName,Password,Email")] AdminInformation adminInformation)
+        public ActionResult ResetPassword(ResetPasswordModel model)
         {
+            var message = "";
             if (ModelState.IsValid)
             {
-                db.Entry(adminInformation).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                using (TaxSystemEntities1 dc = new TaxSystemEntities1())
+                {
+                    var user = dc.AdminInformations.Where(a => a.ResetPasswordCode == model.ResetCode).FirstOrDefault();
+                    if (user != null)
+                    {
+                        user.Password = model.NewPassword;
+                        user.ResetPasswordCode = "";
+                        dc.Configuration.ValidateOnSaveEnabled = false;
+                        dc.SaveChanges();
+                        message = "New password updated successfully";
+                    }
+                }
             }
-            return View(adminInformation);
+            else
+            {
+                message = "Something invalid";
+            }
+            ViewBag.Message = message;
+            return View(model);
+        }
+        public ActionResult IncomeTaxInformation() {
+            if (Session["Admin"] != null)
+            {
+                var taxInformations = db.TaxInformations.Include(t => t.Registration);
+                return View(taxInformations.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Index", "AdminInformations");
+            }
+           
+        }
+        [HttpPost]
+        public ActionResult GSTInformation(Registration reg)
+        {
+            if (Session["Admin"] != null)
+            {
+                using (TaxSystemEntities1 db = new TaxSystemEntities1())
+                {
+                    ViewBag.rege = reg.FirstName;
+                    var data = db.GSTINformations.Where(a => a.Registration.PanNumber == reg.PanNumber).ToList();
+                    ViewData["reg"] = data  ;
+                    
+                        return View(data);
+
+                     
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "AdminInformations");
+            }
+          
+        }
+        public ActionResult Search()
+        {
+            if (Session["Admin"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "AdminInformations");
+            }
+
         }
 
-        // GET: AdminInformations/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AdminInformation adminInformation = db.AdminInformations.Find(id);
-            if (adminInformation == null)
-            {
-                return HttpNotFound();
-            }
-            return View(adminInformation);
-        }
-
-        // POST: AdminInformations/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            AdminInformation adminInformation = db.AdminInformations.Find(id);
-            db.AdminInformations.Remove(adminInformation);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

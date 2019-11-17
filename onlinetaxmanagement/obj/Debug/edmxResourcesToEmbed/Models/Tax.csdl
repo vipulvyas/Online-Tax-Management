@@ -7,17 +7,17 @@
     <Property Name="UserName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="260" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="ResetPasswordCode" Type="String" MaxLength="260" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="GSTINformation">
     <Key>
       <PropertyRef Name="Gid" />
     </Key>
     <Property Name="Gid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MRP" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="MRP" Type="Decimal" Precision="8" Scale="0" />
     <Property Name="Uid" Type="Int32" Nullable="false" />
-    <Property Name="GST" Type="Decimal" Precision="6" Scale="0" Nullable="false" />
-    <Property Name="Bill" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-    <Property Name="Flag" Type="Decimal" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="GST" Type="Decimal" Precision="6" Scale="0" />
+    <Property Name="Bill" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Registration" Relationship="Self.FK_GSTINformation_ToTable" FromRole="GSTINformation" ToRole="Registration" />
   </EntityType>
   <EntityType Name="Registration">
@@ -28,15 +28,16 @@
     <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="LastName" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="PanNumber" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="MobileNumber" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="MobileNumber" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="260" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="BankName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="AccountNumber" Type="Decimal" Precision="14" Scale="0" Nullable="false" />
+    <Property Name="AccountNumber" Type="String" Nullable="false" MaxLength="14" Unicode="true" FixedLength="true" />
     <Property Name="IFSC" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
     <NavigationProperty Name="GSTINformations" Relationship="Self.FK_GSTINformation_ToTable" FromRole="Registration" ToRole="GSTINformation" />
     <NavigationProperty Name="TaxInformations" Relationship="Self.FK_TaxInformation_ToTable" FromRole="Registration" ToRole="TaxInformation" />
     <Property Name="ResetPasswordCode" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Flag" Type="Int32" />
   </EntityType>
   <EntityType Name="TaxInformation">
     <Key>
@@ -44,7 +45,7 @@
     </Key>
     <Property Name="Tid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Uid" Type="Int32" Nullable="false" />
-    <Property Name="Year" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="Year" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="true" />
     <Property Name="Status" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="TotalIncome" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
     <Property Name="TotalTax" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
