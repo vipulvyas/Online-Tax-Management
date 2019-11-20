@@ -415,12 +415,11 @@
     <Content Include="Views\TaxCal\Incometaxinfo.cshtml" />
     <Content Include="Views\Login\ForgotPassword.cshtml" />
     <Content Include="Views\Login\ResetPassword.cshtml" />
-    <Content Include="Views\GSTINformations\UploadFile.cshtml" />
     <Content Include="Views\AdminInformations\ForgotPassword.cshtml" />
     <Content Include="Views\AdminInformations\ResetPassword.cshtml" />
     <Content Include="Views\AdminInformations\IncomeTaxInformation.cshtml" />
-    <Content Include="Views\AdminInformations\GSTInformation.cshtml" />
     <Content Include="Views\AdminInformations\Search.cshtml" />
+    <Content Include="Views\AdminInformations\DGSTbill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

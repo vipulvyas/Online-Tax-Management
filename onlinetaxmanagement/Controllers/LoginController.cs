@@ -33,6 +33,7 @@ namespace onlinetaxmanagement.Controllers
                     if (obj != null)
                     {
                         Session["PanNumber"] = obj.PanNumber.ToString();
+                        Session["Uid"] = Convert.ToInt32(obj.Uid);
                         return RedirectToAction("Index", "Home");
                     }
                 }

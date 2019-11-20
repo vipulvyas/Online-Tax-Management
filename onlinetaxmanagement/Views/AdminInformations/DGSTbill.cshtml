@@ -1,0 +1,47 @@
+﻿@model IEnumerable<onlinetaxmanagement.Models.GSTINformation>
+
+@{
+    ViewBag.Title = "DGSTbill";
+}
+@{ decimal total = 0;}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @ViewBag.email
+    
+    <table class="table">
+        <tr>
+            <th style="padding-left:10%">
+                @Html.DisplayNameFor(model => model.MRP)
+            </th>
+            <th style="padding-left:25%">
+                @Html.DisplayNameFor(model => model.GST)
+            </th>
+            <th style="padding-left:47%">
+                @Html.DisplayNameFor(model => model.Bill)
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="padding-left:10%">
+                    @Html.DisplayFor(modelItem => item.MRP)
+                </td>
+                <td style="padding-left:25%">
+                    @Html.DisplayFor(modelItem => item.GST)
+
+                    @{total = total + Convert.ToDecimal(item.GST);}
+
+                </td>
+                <td style="padding-left:30%">
+                    <img src="~/UploadedFiles/@item.Bill" style="height:30%;width:65%;" alt="@item.Bill">
+                </td>
+            </tr>
+        }
+       Total Gst Amount: @total
+    </table>
+    
+}

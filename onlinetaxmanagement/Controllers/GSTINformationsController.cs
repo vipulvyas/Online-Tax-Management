@@ -31,16 +31,23 @@ namespace onlinetaxmanagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadFile(HttpPostedFileBase billfile)
+        public ActionResult UploadFile(HttpPostedFileBase billfile, [ Bind(Include = "MRP,GST")] GSTINformation gSTINformation)
         {
             try
             {
                 if (billfile.ContentLength > 0)
                 {
-
+                    
                     string _FileName = Path.GetFileName(billfile.FileName);
                     string _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _FileName);
                     billfile.SaveAs(_path);
+                    gSTINformation.Bill = _FileName;
+                    gSTINformation.Uid = Convert.ToInt32(Session["Uid"]);
+                    if (ModelState.IsValid)
+                    {
+                        db.GSTINformations.Add(gSTINformation);
+                        db.SaveChanges();
+                    }
                 }
                 ViewBag.Message = "File Uploaded Successfully!!";
                 return View("Gstrate");

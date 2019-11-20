@@ -202,33 +202,39 @@ namespace onlinetaxmanagement.Controllers
             }
            
         }
-        [HttpPost]
-        public ActionResult GSTInformation(Registration reg)
+        
+        public ActionResult Search()
         {
             if (Session["Admin"] != null)
             {
+
                 using (TaxSystemEntities1 db = new TaxSystemEntities1())
                 {
-                    ViewBag.rege = reg.FirstName;
-                    var data = db.GSTINformations.Where(a => a.Registration.PanNumber == reg.PanNumber).ToList();
-                    ViewData["reg"] = data  ;
-                    
-                        return View(data);
-
-                     
+                   
+                    return View(db.Registrations.ToList());
                 }
             }
             else
             {
                 return RedirectToAction("Index", "AdminInformations");
             }
-          
+
         }
-        public ActionResult Search()
+        [HttpPost]
+        public ActionResult DGSTbill(GSTINformation gst)
         {
             if (Session["Admin"] != null)
             {
-                return View();
+
+                using (TaxSystemEntities1 db = new TaxSystemEntities1())
+                {
+                    var x =Convert.ToInt32(Request["item.Uid"]);
+                    ViewBag.email =Request["item.Email"].ToString();
+                    var data = db.GSTINformations.Where(m => m.Registration.Uid.Equals(x)).ToList();
+                    if (data == null)
+                        return View();
+                    return View(data);
+                }
             }
             else
             {
