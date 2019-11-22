@@ -14,11 +14,12 @@
       <PropertyRef Name="Gid" />
     </Key>
     <Property Name="Gid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MRP" Type="Decimal" Precision="8" Scale="0" />
+    <Property Name="MRP" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
     <Property Name="Uid" Type="Int32" Nullable="false" />
-    <Property Name="GST" Type="Decimal" Precision="6" Scale="0" />
-    <Property Name="Bill" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="GST" Type="Decimal" Precision="6" Scale="0" Nullable="false" />
+    <Property Name="Bill" Type="String" MaxLength="100" Unicode="true" FixedLength="false" Nullable="false" />
     <NavigationProperty Name="Registration" Relationship="Self.FK_GSTINformation_ToTable" FromRole="GSTINformation" ToRole="Registration" />
+    <Property Name="Flag" Type="Int32" />
   </EntityType>
   <EntityType Name="Registration">
     <Key>
@@ -37,7 +38,7 @@
     <NavigationProperty Name="GSTINformations" Relationship="Self.FK_GSTINformation_ToTable" FromRole="Registration" ToRole="GSTINformation" />
     <NavigationProperty Name="TaxInformations" Relationship="Self.FK_TaxInformation_ToTable" FromRole="Registration" ToRole="TaxInformation" />
     <Property Name="ResetPasswordCode" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-    <Property Name="Flag" Type="Int32" />
+    <NavigationProperty Name="GSTNumbers" Relationship="TaxSystemModel.FK_GSTNumbers_ToTable" FromRole="Registration" ToRole="GSTNumber" />
   </EntityType>
   <EntityType Name="TaxInformation">
     <Key>
@@ -45,8 +46,8 @@
     </Key>
     <Property Name="Tid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Uid" Type="Int32" Nullable="false" />
-    <Property Name="Year" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="true" />
-    <Property Name="Status" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Year" Type="String" Nullable="false" MaxLength="8" Unicode="true" FixedLength="true" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="TotalIncome" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
     <Property Name="TotalTax" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
     <NavigationProperty Name="Registration" Relationship="Self.FK_TaxInformation_ToTable" FromRole="TaxInformation" ToRole="Registration" />
@@ -88,5 +89,31 @@
       <End Role="Registration" EntitySet="Registrations" />
       <End Role="TaxInformation" EntitySet="TaxInformations" />
     </AssociationSet>
+    <EntitySet Name="GSTNumbers" EntityType="TaxSystemModel.GSTNumber" />
+    <AssociationSet Name="FK_GSTNumbers_ToTable" Association="TaxSystemModel.FK_GSTNumbers_ToTable">
+      <End Role="Registration" EntitySet="Registrations" />
+      <End Role="GSTNumber" EntitySet="GSTNumbers" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="GSTNumber">
+    <Key>
+      <PropertyRef Name="GnId" />
+    </Key>
+    <Property Name="GnId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Uid" Type="Int32" Nullable="false" />
+    <Property Name="GSTNumber1" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Registration" Relationship="TaxSystemModel.FK_GSTNumbers_ToTable" FromRole="GSTNumber" ToRole="Registration" />
+  </EntityType>
+  <Association Name="FK_GSTNumbers_ToTable">
+    <End Type="TaxSystemModel.Registration" Role="Registration" Multiplicity="1" />
+    <End Type="TaxSystemModel.GSTNumber" Role="GSTNumber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Registration">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="GSTNumber">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

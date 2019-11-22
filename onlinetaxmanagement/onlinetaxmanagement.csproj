@@ -142,6 +142,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminInformationsController.cs" />
     <Compile Include="Controllers\GSTINformationsController.cs" />
+    <Compile Include="Controllers\GSTNumbersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegistrationsController.cs" />
@@ -154,6 +155,9 @@
       <DependentUpon>Tax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GSTINformation.cs">
+      <DependentUpon>Tax.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GSTNumber.cs">
       <DependentUpon>Tax.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Registration.cs">
@@ -194,13 +198,18 @@
     <Content Include="Content\fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
     <Content Include="Content\fonts\montserrat\OFL.txt" />
     <Content Include="Content\hamburgers.min.css" />
+    <Content Include="Content\images\Capture.PNG" />
     <Content Include="Content\images\Facebook.png" />
     <Content Include="Content\images\finallogo.png" />
+    <Content Include="Content\images\gst.jpg" />
+    <Content Include="Content\images\history.jpg" />
     <Content Include="Content\images\icons\favicon.ico" />
     <Content Include="Content\images\img-01.png" />
+    <Content Include="Content\images\incometax.png" />
     <Content Include="Content\images\Instagram.png" />
     <Content Include="Content\images\interview.png" />
     <Content Include="Content\images\Linkedin.png" />
+    <Content Include="Content\images\map.png" />
     <Content Include="Content\images\Twitter.png" />
     <Content Include="Content\main.css" />
     <Content Include="Content\Register\css\main.css" />
@@ -420,6 +429,14 @@
     <Content Include="Views\AdminInformations\IncomeTaxInformation.cshtml" />
     <Content Include="Views\AdminInformations\Search.cshtml" />
     <Content Include="Views\AdminInformations\DGSTbill.cshtml" />
+    <Content Include="Views\GSTNumbers\Create.cshtml" />
+    <Content Include="Views\GSTNumbers\Delete.cshtml" />
+    <Content Include="Views\GSTNumbers\Details.cshtml" />
+    <Content Include="Views\GSTNumbers\Edit.cshtml" />
+    <Content Include="Views\GSTNumbers\Index.cshtml" />
+    <Content Include="Views\AdminInformations\Approve.cshtml" />
+    <Content Include="Views\TaxInformations\History.cshtml" />
+    <Content Include="Views\GSTINformations\EnterGST.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

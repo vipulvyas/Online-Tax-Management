@@ -1,4 +1,5 @@
-﻿using System;
+﻿using onlinetaxmanagement.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -27,16 +28,19 @@ namespace TaxApp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ComputeTax()
+        public ActionResult ComputeTax(TaxInformation taxinfo)
         {
-            int year = Convert.ToInt32(Request["year"].ToString());
+            string year =Request["year"].ToString();
+            string tptext = Request["tptext"].ToString();
+            string stext = Request["statustext"].ToString();
+            string status = tptext + " || " + stext;
             int taxpayer = Convert.ToInt32(Request["taxpayer"].ToString());
-            int status = Convert.ToInt32(Request["status"].ToString());
+            int statusnum = Convert.ToInt32(Request["status"].ToString());
             int taxableincome = Convert.ToInt32(Request["taxableincome"].ToString());
             int arincometax = 0, surcharge = 0, educationcess = 0, totaltax = 0;
             if (taxpayer <= 1)
             {
-                if (status <= 1)
+                if (statusnum <= 1)
                 {
                     if (taxableincome <= 250000)
                     {
@@ -82,7 +86,7 @@ namespace TaxApp.Controllers
                     educationcess = arincometax * 4 / 100;
                     totaltax = arincometax + surcharge + educationcess;
                 }
-                else if (status == 2)
+                else if (statusnum == 2)
                 {
                     if (taxableincome <= 300000)
                     {
@@ -177,6 +181,19 @@ namespace TaxApp.Controllers
                 }
                 educationcess = arincometax * 4 / 100;
                 totaltax = arincometax + surcharge + educationcess;
+            }
+            using (TaxSystemEntities1 db = new TaxSystemEntities1())
+            {
+                if (ModelState.IsValid)
+                {
+                    taxinfo.TotalIncome = taxableincome;
+                    taxinfo.Status = status;
+                    taxinfo.TotalTax = totaltax;
+                    taxinfo.Year = year;
+                    taxinfo.Uid = Convert.ToInt32(Session["Uid"]);
+                    db.TaxInformations.Add(taxinfo);
+                    db.SaveChanges();
+                }
             }
             ViewBag.arincometax = arincometax;
             ViewBag.taxableincome = taxableincome;

@@ -3,52 +3,78 @@
 @{
     ViewBag.Title = "GST TAX RATES ON SOME ITEM";
 }
+<script type="text/javascript">
+    function myFunction() {
+        var rate = $('#catagory').find(":selected").attr('value');
+        var totalamount = $('#totalamount').val();
+        gstamount = rate * totalamount/100;
+        $('#gstamount').val(gstamount);
+    }
+</script>
+<center class="my-4"><h1 class="text-center shadow">Upload GST Bill</h1></center>
 <div>
     @using (Html.BeginForm("Uploadfile", "GSTINformations", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
-    <center>
-        <fieldset style="border:5px solid green;margin:2% 30%;background-color:pink;border-radius:15px" >
-        <div class="form-group">
-            @Html.Label(" Total Amount ", new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MRP, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MRP, "", new { @class = "text-danger" })
+        <center>
+            <fieldset style="border:5px solid green;margin:2% 30%;background-color:lightblue;border-radius:15px">
+                <div class="form-group mt-5">
+                    @Html.Label(" Total Amount ", new { @class = "control-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MRP, new { htmlAttributes = new { @id = "totalamount", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MRP, "", new { @class = "text-danger" })
 
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.Label(" GST Amount ", new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.GST, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.GST, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.Label("Upload Bill", new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBox("billfile", "", new { type = "file" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Catagories", new { @class = "control-label" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("catagory", new List<SelectListItem> {
+                           new SelectListItem {Text="Food",Value="12" },
+                           new SelectListItem {Text="Loan",Value="18" },
+                           new SelectListItem {Text="Gold",Value="3" },
+                           new SelectListItem {Text="Vehicle",Value="28" },
+                           new SelectListItem {Text="Fuel",Value="28" },
+                           new SelectListItem {Text="Tourism",Value="5" },
+                           new SelectListItem {Text="Real Estate",Value="12" },
+                           new SelectListItem {Text="Grossery",Value="10" }
+                }, "--Please Select One--", new { @id = "catagory", @class = "form-control", onChange = "myFunction(this)" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label(" GST Amount ", new { @class = "control-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.GST, new { htmlAttributes = new { @id = "gstamount", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.GST, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Upload Bill", new { @class = "control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBox("billfile", "", new { type = "file" })
 
+                        @Html.HiddenFor(model => model.Flag, new { Value = "1" })
 
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="Upload" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                @ViewBag.message
-            </div>
-        </div>
-        </fieldset>
-    </center>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-success" value="Upload" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @ViewBag.message
+                    </div>
+                </div>
+            </fieldset>
+        </center>
     }
 
 </div>
-        
+<hr/>
 <main class="container-fluid text-justify ">
+    <center class="my-4"><h1 class="text-center shadow"> GST Rate </h1></center>
     <p><b>GST</b>&nbsp;is perhaps the biggest tax-related reform in India since Independence bringing uniformity in the taxation structure and eliminating the cascading of taxes that was levied in the past. The GST Council meets from time to time to revise the GST rates for various products. Several states and industries recommend reduction in GST tax rate for various items which are discussed in these meetings.</p>
     <p><b>GST stands for Goods and Services Tax. Following are the various types of GST .</b></p>
     <ul>
@@ -60,7 +86,7 @@
     <hr />
     <div>
         <h2><strong>GST Tax Rates on some common items</strong></h2>
-        <table class="table table-bordered my-4">
+        <table class="table table-striped table-bordered my-4">
             <tbody>
                 <tr>
                     <td><b>Tax Rates</b></td>
@@ -99,7 +125,7 @@
     <p><b>UPDATE: </b><span style="font-weight: 400;">As per 37</span><span style="font-weight: 400;">th</span><span style="font-weight: 400;"> GST Council Meeting, cut and semi-polished stones will be taxed at 0.25% GST. This is a 5</span><span style="font-weight: 400;">th</span><span style="font-weight: 400;"> GST tier that only includes a few products.&nbsp;</span></p>
     <h4><strong><u>No Tax</u></strong></h4>
     <p>Apart from other items that enjoy zero GST tax rate, these are the commodities added to the list after 11th June rate revision –</p>
-    <table class="table table-bordered my-4">
+    <table class="table table-striped table-bordered my-4">
         <tbody>
             <tr>
                 <td><span style="font-weight: 400;">Cashew nuts/cashew nuts in shell</span></td>
@@ -127,7 +153,7 @@
 
     <h4><b>12% Tax Slab</b></h4>
     <p><span style="font-weight: 400;">After the GST council meeting on 11th June, the following items were added to the 12% GST rates category-</span></p>
-    <table class="table table-bordered my-4">
+    <table class="table table-striped table-bordered my-4">
         <tbody>
             <tr>
                 <td><span style="font-weight: 400;">Preparations of vegetables, fruits, nuts or other parts of plants, including pickle, murabba, chutney, jam, jelly</span></td>
@@ -162,7 +188,7 @@
 
     <h4><b>18% Tax Slab</b></h4>
     <p><span style="font-weight: 400;">The items mentioned below have been added to the 18% GST tax rate slab among the other existing items-</span></p>
-    <table class="table table-bordered my-4">
+    <table class="table table-striped table-bordered my-4">
         <tbody>
             <tr>
                 <td><span style="font-weight: 400;">Kajal pencil sticks</span></td>
@@ -230,7 +256,7 @@
     </ul>
 
     <h4><b>5% Tax Slab</b></h4>
-    <table class="table table-bordered my-4">
+    <table class="table table-striped table-bordered my-4">
         <tbody>
             <tr>
                 <td><span style="font-weight: 400;">Working for printing of newspapers</span></td>
@@ -250,7 +276,7 @@
     </table>
 
     <h4><b>12% Tax Slab</b></h4>
-    <table class="table table-bordered my-4">
+    <table class="table table-striped table-bordered my-4">
         <tbody>
             <tr>
                 <td><span style="font-weight: 400;">Rail transportation of goods in containers from a third party other than Indian Railways</span></td>
@@ -270,7 +296,7 @@
     </table>
 
     <p><b style="font-size: 24px;">18% Tax Slab<br> </b></p>
-    <table class="table table-bordered  my-4">
+    <table class="table table-striped table-bordered  my-4">
         <tbody>
             <tr>
                 <td><span style="font-weight: 400;">Food/drinks at restaurants with liquor license</span></td>
@@ -290,7 +316,7 @@
     </table>
 
     <h4><b>28% Tax Slab</b></h4>
-    <table class="table table-bordered  my-4">
+    <table class="table table-striped table-bordered  my-4">
         <tbody>
             <tr>
                 <td><span style="font-weight: 400;">Entertainment events-amusement facility, water parks, theme parks, joy rides, merry-go-round, race course, go-carting, casinos, ballet, sporting events like IPL</span></td>

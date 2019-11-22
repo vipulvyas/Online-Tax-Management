@@ -14,10 +14,19 @@
       <PropertyRef Name="Gid" />
     </Key>
     <Property Name="Gid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MRP" Type="numeric" Precision="8" Scale="0" />
+    <Property Name="MRP" Type="numeric" Precision="8" Scale="0" Nullable="false" />
     <Property Name="Uid" Type="int" Nullable="false" />
-    <Property Name="GST" Type="numeric" Precision="6" Scale="0" />
-    <Property Name="Bill" Type="nvarchar" MaxLength="100" />
+    <Property Name="GST" Type="numeric" Precision="6" Scale="0" Nullable="false" />
+    <Property Name="Bill" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Flag" Type="int" />
+  </EntityType>
+  <EntityType Name="GSTNumber">
+    <Key>
+      <PropertyRef Name="GnId" />
+    </Key>
+    <Property Name="GnId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Uid" Type="int" Nullable="false" />
+    <Property Name="GSTNumber" Type="nchar" MaxLength="15" />
   </EntityType>
   <EntityType Name="Registration">
     <Key>
@@ -34,7 +43,6 @@
     <Property Name="AccountNumber" Type="nchar" MaxLength="14" Nullable="false" />
     <Property Name="IFSC" Type="nchar" MaxLength="11" Nullable="false" />
     <Property Name="ResetPasswordCode" Type="nchar" MaxLength="100" />
-    <Property Name="Flag" Type="int" />
   </EntityType>
   <EntityType Name="TaxInformation">
     <Key>
@@ -42,8 +50,8 @@
     </Key>
     <Property Name="Tid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Uid" Type="int" Nullable="false" />
-    <Property Name="Year" Type="nchar" MaxLength="4" Nullable="false" />
-    <Property Name="Status" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="Year" Type="nchar" MaxLength="8" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="50" Nullable="false" />
     <Property Name="TotalIncome" Type="numeric" Precision="8" Scale="0" Nullable="false" />
     <Property Name="TotalTax" Type="numeric" Precision="8" Scale="0" Nullable="false" />
   </EntityType>
@@ -55,6 +63,18 @@
         <PropertyRef Name="Uid" />
       </Principal>
       <Dependent Role="GSTINformation">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GSTNumbers_ToTable">
+    <End Role="Registration" Type="Self.Registration" Multiplicity="1" />
+    <End Role="GSTNumber" Type="Self.GSTNumber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Registration">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="GSTNumber">
         <PropertyRef Name="Uid" />
       </Dependent>
     </ReferentialConstraint>
@@ -74,11 +94,16 @@
   <EntityContainer Name="TaxSystemModelStoreContainer">
     <EntitySet Name="AdminInformation" EntityType="Self.AdminInformation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GSTINformation" EntityType="Self.GSTINformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GSTNumber" EntityType="Self.GSTNumber" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TaxInformation" EntityType="Self.TaxInformation" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_GSTINformation_ToTable" Association="Self.FK_GSTINformation_ToTable">
       <End Role="Registration" EntitySet="Registration" />
       <End Role="GSTINformation" EntitySet="GSTINformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GSTNumbers_ToTable" Association="Self.FK_GSTNumbers_ToTable">
+      <End Role="Registration" EntitySet="Registration" />
+      <End Role="GSTNumber" EntitySet="GSTNumber" />
     </AssociationSet>
     <AssociationSet Name="FK_TaxInformation_ToTable" Association="Self.FK_TaxInformation_ToTable">
       <End Role="Registration" EntitySet="Registration" />

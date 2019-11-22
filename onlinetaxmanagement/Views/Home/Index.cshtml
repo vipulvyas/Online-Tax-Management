@@ -1,4 +1,23 @@
 ﻿
+@if (ViewBag.temp == null && Session["Uid"] != null)
+{
+    <div style="background-color:yellow;padding:1%">
+        <center><h3><a href="~/GSTNumbers/Apply">Apply For GST Number</a></h3></center>
+    </div>
+}
+else
+{
+
+    if (Session["message1"] != null)
+    {
+        ViewBag.mes = Session["message1"].ToString();
+        <div style="background-color:yellow;padding:1%">
+            <center><h3>@ViewBag.mes</h3></center>
+        </div>
+
+        Session["message1"] = null;
+    }
+}
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -8,13 +27,40 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" src="~/Content/images/Facebook.png"  style="height:auto;" alt="First slide">
+            <img class="d-block w-100" src="~/Content/images/gst.jpg" style="height:550px;" alt="First slide">
+            <div style="position: absolute;left: 10%;top: 30%;background-color: rgba(0, 0, 0, 0.37);color: white;padding: 4px 20px 50px 20px;">
+                <h4>GST</h4><br />
+                <p>About Goods And Service Tax...</p>
+                <center>
+                    <div style="position: relative;">
+                        <button type="button" class="btn" style="background-color:lightblue;margin-top:5%;"><a href="~/GSTInformations/EnterGST">GST</a></button>
+                    </div>
+                </center>
+            </div>
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="~/Content/images/Twitter.png"  style="height:auto;" alt="Second slide">
+            <img class="d-block w-100" src="~/Content/images/incometax.png" style="height:550px;" alt="Second slide">
+            <div style="position: absolute;left: 10%;top: 30%;background-color: rgba(0, 0, 0, 0.37);color: white;padding: 4px 20px 50px 20px;">
+                <h4>Income Tax</h4><br />
+                <p>Pay Your Payable Income Tax...</p>
+                <center>
+                    <div style="position: relative;">
+                        <button type="button" class="btn" style="background-color:lightblue;margin-top:5%;"><a href="~/TaxCal">Income Tax</a></button>
+                    </div>
+                </center>
+            </div>
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" style="height:auto;"  src="~/Content/images/Instagram.png" alt="Third slide">
+            <img class="d-block w-100" style="height:550px;" src="~/Content/images/history.jpg" alt="Third slide">
+            <div style="position: absolute;left: 10%;top: 30%;background-color: rgba(0, 0, 0, 0.37);color: white;padding: 4px 20px 50px 20px;">
+                <h4>Income Tax</h4><br />
+                <p>Check Your Income Tax History</p>
+                <center>
+                    <div style="position: relative;">
+                        <button type="button" class="btn" style="background-color:lightblue;margin-top:5%;"><a href="~/TaxInformations/History">History</a></button>
+                    </div>
+                </center>
+            </div>
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -25,4 +71,32 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
-</div>
+</div><br/><br/>
+<fieldset>
+    <div class="container">
+        <div class="row" style="text-align: center;position: relative;border: 3px solid green; border-radius:10px;">
+            <div class="col-lg-7 col-md-12 col-sm-12" id="123">
+                <div style="margin-top: 25px;">
+                    <h3><b> Spends Your Tax Money</b></h3><br/><br/>
+                    <h6>
+                        <strong> Health programs:</strong> Your taxes go to fund health programs like Medicaid, Medicare, Children’s Health Insurance Program and general health initiatives. Together these programs account for around 28% of last year’s federal budget.
+                        <br />
+                        <strong> Military:</strong> Your taxes also help pay for national defense and security-related programs. Funds in this category support the Department of Defense and the cost of international military programs.
+                        <br />
+                        <strong>Social Security:</strong> More than 60 million Americans received Social Security benefits in 2016. Beneficiaries include retired workers, surviving children and spouses of deceased workers, and disabled workers.
+                        <br />
+                        <strong>Interest on the national debt: </strong>It’s no secret that the government isn’t gazelle intense about paying off its debt. The national debt is $17 trillion, and the federal government relies on your taxes to make the interest payments on the borrowed funds. Last year, the interest payments claimed around 6% of the federal budget.
+                    </h6>         <br/><br/>       </div>
+                
+            </div>
+
+            <div class="col-lg-5 col-md-0 col-sm-0" style="margin-top:4%;">
+                <div id="hidden1">
+                    <img src="~/Content/images/map.png" style="width:100%;" />
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<br />
+

@@ -29,5 +29,6 @@ namespace onlinetaxmanagement.Models
         public virtual DbSet<GSTINformation> GSTINformations { get; set; }
         public virtual DbSet<Registration> Registrations { get; set; }
         public virtual DbSet<TaxInformation> TaxInformations { get; set; }
+        public virtual DbSet<GSTNumber> GSTNumbers { get; set; }
     }
 }

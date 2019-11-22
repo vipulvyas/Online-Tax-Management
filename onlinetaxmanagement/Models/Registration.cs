@@ -19,6 +19,7 @@ namespace onlinetaxmanagement.Models
         {
             this.GSTINformations = new HashSet<GSTINformation>();
             this.TaxInformations = new HashSet<TaxInformation>();
+            this.GSTNumbers = new HashSet<GSTNumber>();
         }
     
         public int Uid { get; set; }
@@ -32,11 +33,12 @@ namespace onlinetaxmanagement.Models
         public string AccountNumber { get; set; }
         public string IFSC { get; set; }
         public string ResetPasswordCode { get; set; }
-        public Nullable<int> Flag { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GSTINformation> GSTINformations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaxInformation> TaxInformations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GSTNumber> GSTNumbers { get; set; }
     }
 }

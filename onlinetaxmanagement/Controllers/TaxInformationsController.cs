@@ -28,7 +28,23 @@ namespace onlinetaxmanagement.Controllers
             }
             
         }
-
+        public ActionResult History(TaxInformation tax)
+        {
+            if (Session["PanNumber"] != null)
+            {
+                ViewBag.m = Session["PanNumber"].ToString();
+                using (TaxSystemEntities1 db = new TaxSystemEntities1())
+                {
+                    var x = Convert.ToInt32(Session["Uid"]);
+                    var data = db.TaxInformations.Where(m => m.Uid.Equals(x)).ToList();
+                    return View(data);
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+        }
         // GET: TaxInformations/Details/5
         public ActionResult Details(int? id)
         {

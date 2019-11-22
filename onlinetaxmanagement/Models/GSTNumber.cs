@@ -12,14 +12,11 @@ namespace onlinetaxmanagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class GSTINformation
+    public partial class GSTNumber
     {
-        public int Gid { get; set; }
-        public decimal MRP { get; set; }
+        public int GnId { get; set; }
         public int Uid { get; set; }
-        public decimal GST { get; set; }
-        public string Bill { get; set; }
-        public Nullable<int> Flag { get; set; }
+        public string GSTNumber1 { get; set; }
     
         public virtual Registration Registration { get; set; }
     }

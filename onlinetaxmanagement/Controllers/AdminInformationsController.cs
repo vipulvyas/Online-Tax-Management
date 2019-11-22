@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using onlinetaxmanagement.Models;
@@ -19,6 +20,7 @@ namespace onlinetaxmanagement.Controllers
         // GET: AdminInformations
         public ActionResult Index()
         {
+            Session["adminuser"] = "1";
             return View();
         }
         [HttpPost]
@@ -53,7 +55,7 @@ namespace onlinetaxmanagement.Controllers
                 return RedirectToAction("Index", "AdminInformations");
 
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "AdminInformations");
         }
         [HttpGet]
         public ActionResult ForgotPassword()
@@ -82,7 +84,7 @@ namespace onlinetaxmanagement.Controllers
             else if (emailFor == "ResetPassword")
             {
                 subject = "Reset Password";
-                body = "Hi,<br/>br/>We got request for reset your account password. Please click on the below link to reset your password" +
+                body = "Hi,<br/><br/>We got request for reset your account password. Please click on the below link to reset your password" +
                     "<br/><br/><a href=" + link + ">Reset Password link</a>";
             }
 
@@ -113,7 +115,6 @@ namespace onlinetaxmanagement.Controllers
             //Generate Reset password link 
             //Send Email 
             string message = "";
-            bool status = false;
 
             using (TaxSystemEntities1 dc = new TaxSystemEntities1())
             {
@@ -202,7 +203,67 @@ namespace onlinetaxmanagement.Controllers
             }
            
         }
-        
+        public ActionResult Approve()
+        {
+            if (Session["Admin"] != null)
+            {
+                var taxInformations = db.GSTNumbers.Include(t => t.Registration).ToList();
+                return View(taxInformations);
+            }
+            else
+            {
+                return RedirectToAction("Index", "AdminInformations");
+            }
+
+        }
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+        [HttpPost]
+        public ActionResult Approval()
+        {
+            if (Session["Admin"] != null)
+            {
+                var gst = RandomString(15);
+                var uid =Convert.ToInt32(Request["item.Uid"]);
+                var Email = Request["item.Registration.Email"].ToString();
+                var taxInformations = db.GSTNumbers.Where(t => t.Registration.Uid.Equals(uid)).FirstOrDefault();
+                taxInformations.GSTNumber1 = gst;
+                db.SaveChanges();
+                var fromEmail = new MailAddress("taxbazar001@gmail.com", "TaxBazar");
+                var toEmail = new MailAddress(Email);
+                var fromEmailPassword = "@taxbazar.com";
+                string subject = "About GST Number";
+                string body = "Your GST Number Request is Approved and Your GST Number is "+gst;
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+                };
+                using (var message = new MailMessage(fromEmail, toEmail)
+                {
+                    Subject = subject,
+                    Body = body,
+                    IsBodyHtml = true
+                })
+                    smtp.Send(message);
+
+                return RedirectToAction("Approve", "AdminInformations");
+            }
+            else
+            {
+                return RedirectToAction("Index", "AdminInformations");
+            }
+        }
+
         public ActionResult Search()
         {
             if (Session["Admin"] != null)
@@ -210,7 +271,6 @@ namespace onlinetaxmanagement.Controllers
 
                 using (TaxSystemEntities1 db = new TaxSystemEntities1())
                 {
-                   
                     return View(db.Registrations.ToList());
                 }
             }
@@ -230,6 +290,7 @@ namespace onlinetaxmanagement.Controllers
                 {
                     var x =Convert.ToInt32(Request["item.Uid"]);
                     ViewBag.email =Request["item.Email"].ToString();
+                    Session["Email"] = Request["item.Email"].ToString();
                     var data = db.GSTINformations.Where(m => m.Registration.Uid.Equals(x)).ToList();
                     if (data == null)
                         return View();
@@ -242,6 +303,56 @@ namespace onlinetaxmanagement.Controllers
             }
 
         }
+        public ActionResult Sendrefund()
+        {
+            if (Session["Admin"] != null)
+            {
+                var Email = Session["Email"].ToString();
+                var total = Session["Total"].ToString();
+                var fromEmail = new MailAddress("taxbazar001@gmail.com", "TaxBazar");
+                var toEmail = new MailAddress(Email);
+                var fromEmailPassword = "@taxbazar.com";
+                string subject = "Refund Information";
+                string body = "Your Refund is credited in your Bank Account.Amount is "+ total ;
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+                };
+                using (var message = new MailMessage(fromEmail, toEmail)
+                {
+                    Subject = subject,
+                    Body = body,
+                    IsBodyHtml = true
+                })
+                    smtp.Send(message);
+            }
+            else
+            {
+                return RedirectToAction("Index", "AdminInformations");
+            }
 
+            using (TaxSystemEntities1 db = new TaxSystemEntities1())
+            {
+                var x = Session["Email"].ToString();
+                var data = db.Registrations.Where(m => m.Email.Equals(x)).SingleOrDefault();
+                var data1 = db.GSTINformations.Where(q => q.Uid.Equals(data.Uid)).ToList();
+                foreach (var model in data1)
+                {
+                    model.Flag = 0;
+                }
+                db.SaveChanges();
+            }
+
+
+            Session["Email"] = null;
+            Session["Total"] = null;
+            ViewBag.message = "SuccessFul";
+            return RedirectToAction("Search", "AdminInformations");
+        }
     }
 }

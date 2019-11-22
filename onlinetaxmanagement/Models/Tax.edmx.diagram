@@ -11,6 +11,8 @@
         <EntityTypeShape EntityType="TaxSystemModel.TaxInformation" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
         <AssociationConnector Association="TaxSystemModel.FK_GSTINformation_ToTable" ManuallyRouted="false" />
         <AssociationConnector Association="TaxSystemModel.FK_TaxInformation_ToTable" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TaxSystemModel.GSTNumber" Width="1.5" PointX="3" PointY="8.125" />
+        <AssociationConnector Association="TaxSystemModel.FK_GSTNumbers_ToTable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

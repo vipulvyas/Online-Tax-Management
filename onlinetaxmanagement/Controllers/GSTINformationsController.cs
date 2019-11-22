@@ -26,12 +26,11 @@ namespace onlinetaxmanagement.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            var gSTINformations = db.GSTINformations.Include(g => g.Registration);
-            return View(gSTINformations.ToList());
+            
         }
 
         [HttpPost]
-        public ActionResult UploadFile(HttpPostedFileBase billfile, [ Bind(Include = "MRP,GST")] GSTINformation gSTINformation)
+        public ActionResult UploadFile(HttpPostedFileBase billfile, [ Bind(Include = "MRP,GST,Flag")] GSTINformation gSTINformation)
         {
             try
             {
@@ -146,6 +145,43 @@ namespace onlinetaxmanagement.Controllers
             return View(gSTINformation);
         }
 
+        public ActionResult EnterGST()
+        {
+            if (Session["PanNumber"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EnterGST(GSTNumber gstnumber)
+        {
+
+            if (Session["PanNumber"] != null)
+            {
+                using (TaxSystemEntities1 db = new TaxSystemEntities1())
+                {
+                    var x = Request["GSTNumber"].ToString();
+                    var y = Convert.ToInt32(Session["Uid"]);
+                    var data = db.GSTNumbers.Where(m => m.Uid.Equals(y)).FirstOrDefault();
+                    if (data.GSTNumber1 == x)
+                    {
+                        return RedirectToAction("Gstrate", "GSTINformations");
+                    }
+                    ViewBag.Message = "Invalid GST Number";
+                }
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+           
+        }
         // POST: GSTINformations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

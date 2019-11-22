@@ -14,6 +14,7 @@
     <EntitySetMapping Name="GSTINformations">
       <EntityTypeMapping TypeName="TaxSystemModel.GSTINformation">
         <MappingFragment StoreEntitySet="GSTINformation">
+          <ScalarProperty Name="Flag" ColumnName="Flag" />
           <ScalarProperty Name="Gid" ColumnName="Gid" />
           <ScalarProperty Name="MRP" ColumnName="MRP" />
           <ScalarProperty Name="Uid" ColumnName="Uid" />
@@ -25,7 +26,6 @@
     <EntitySetMapping Name="Registrations">
       <EntityTypeMapping TypeName="TaxSystemModel.Registration">
         <MappingFragment StoreEntitySet="Registration">
-          <ScalarProperty Name="Flag" ColumnName="Flag" />
           <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
           <ScalarProperty Name="Uid" ColumnName="Uid" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -49,6 +49,15 @@
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
           <ScalarProperty Name="TotalTax" ColumnName="TotalTax" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GSTNumbers">
+      <EntityTypeMapping TypeName="TaxSystemModel.GSTNumber">
+        <MappingFragment StoreEntitySet="GSTNumber">
+          <ScalarProperty Name="GSTNumber1" ColumnName="GSTNumber" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="GnId" ColumnName="GnId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
