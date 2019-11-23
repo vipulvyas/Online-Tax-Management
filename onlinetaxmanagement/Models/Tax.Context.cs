@@ -30,5 +30,6 @@ namespace onlinetaxmanagement.Models
         public virtual DbSet<Registration> Registrations { get; set; }
         public virtual DbSet<TaxInformation> TaxInformations { get; set; }
         public virtual DbSet<GSTNumber> GSTNumbers { get; set; }
+        public virtual DbSet<PanCardDetail> PanCardDetails { get; set; }
     }
 }

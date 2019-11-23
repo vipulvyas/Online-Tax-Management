@@ -1,0 +1,36 @@
+﻿@model IEnumerable<onlinetaxmanagement.Models.Registration>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+
+    <table class="table  table-bordered table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PanNumber)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        @using (Html.BeginForm("DGSTbill", "AdminInformations", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+        <td>
+            @Html.DisplayFor(modelItem => item.PanNumber)
+            @Html.HiddenFor(model => item.Uid, new { Value = item.Uid })
+            @Html.HiddenFor(model => item.Email, new { Value = item.Email })
+
+        </td>
+            <td>
+                             <input type="submit" class="btn" style="background-color:lightblue;color:blue;" value="Details" />
+               </td>
+           
+        }
+    </tr>
+        }
+
+    </table>

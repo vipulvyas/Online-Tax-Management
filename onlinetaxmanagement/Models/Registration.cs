@@ -11,7 +11,8 @@ namespace onlinetaxmanagement.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Registration
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,14 +24,50 @@ namespace onlinetaxmanagement.Models
         }
     
         public int Uid { get; set; }
+        [Required(ErrorMessage = "Please Enter First Name")]
+        [StringLength(15, ErrorMessage = "The First Name maximum 15 characters")]
+        [Display(Name = "FirstName")]
         public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Last Name")]
+        [StringLength(15, ErrorMessage = "The Last Name maximum 15 characters")]
+        [Display(Name = "LastName")]
         public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Please Enter PanNumber")]
+        [StringLength(10, ErrorMessage = "The Pan Number must contains 10 characters", MinimumLength = 10)]
+        [Display(Name = "PanNumber")]
         public string PanNumber { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Mobile Number")]
+        [StringLength(10, ErrorMessage = "The Mobile Number must contains 10 characters", MinimumLength = 10)]
+        [Display(Name = "MobileNumber")]
         public string MobileNumber { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Email Address")]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Password")]
+        [StringLength(14, ErrorMessage = "Password must be contain 6 to 14 characters", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
         public string Password { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Bank Name")]
+        [StringLength(50)]
+        [Display(Name = "BankName")]
         public string BankName { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Account Number ")]
+        [StringLength(14, ErrorMessage = "The Account Number must contains 10 characters", MinimumLength = 14)]
+        [Display(Name = "AccountNumber")]
         public string AccountNumber { get; set; }
+
+        [Required(ErrorMessage = "Please Enter IFSC")]
+        [StringLength(11, ErrorMessage = "The IFSC must contains 11 characters", MinimumLength = 11)]
+        [Display(Name = "IFSC")]
         public string IFSC { get; set; }
         public string ResetPasswordCode { get; set; }
     

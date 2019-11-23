@@ -28,34 +28,55 @@ namespace onlinetaxmanagement.Controllers
             }
             
         }
+        private bool IsValidExtension(string filePath)
+        {
+            bool isValid = false;
+            string[] fileExtensions = { ".bmp", ".jpg", ".png", ".gif", ".jpeg", ".BMP", ".JPG", ".PNG", ".GIF", ".JPEG" };
 
+            for (int i = 0; i <= fileExtensions.Length - 1; i++)
+            {
+                if (filePath.Contains(fileExtensions[i]))
+                {
+                    isValid = true;
+                }
+            }
+            return isValid;
+        }
         [HttpPost]
         public ActionResult UploadFile(HttpPostedFileBase billfile, [ Bind(Include = "MRP,GST,Flag")] GSTINformation gSTINformation)
         {
-            try
+            if (IsValidExtension(billfile.FileName))
             {
-                if (billfile.ContentLength > 0)
+                try
                 {
-                    
-                    string _FileName = Path.GetFileName(billfile.FileName);
-                    string _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _FileName);
-                    billfile.SaveAs(_path);
-                    gSTINformation.Bill = _FileName;
-                    gSTINformation.Uid = Convert.ToInt32(Session["Uid"]);
-                    if (ModelState.IsValid)
+                    if (billfile.ContentLength > 0)
                     {
-                        db.GSTINformations.Add(gSTINformation);
-                        db.SaveChanges();
+
+                        string _FileName = Path.GetFileName(billfile.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _FileName);
+                        billfile.SaveAs(_path);
+                        gSTINformation.Bill = _FileName;
+                        gSTINformation.Uid = Convert.ToInt32(Session["Uid"]);
+                        if (ModelState.IsValid)
+                        {
+                            db.GSTINformations.Add(gSTINformation);
+                            db.SaveChanges();
+                        }
                     }
+                    ViewBag.Message = "File Uploaded Successfully!!";
+                    return View("Gstrate");
                 }
-                ViewBag.Message = "File Uploaded Successfully!!";
-                return View("Gstrate");
+                catch
+                {
+                    ViewBag.Message = "File upload failed!!";
+                    return View("Gstrate");
+                }
             }
-            catch
+            else
             {
-                ViewBag.Message = "File upload failed!!";
-                return View("Gstrate");
+                ViewBag.Message="Please upload .jpeg,.png,.gif,.jpg,.bmp image only";
             }
+            return View("Gstrate");
         }
         // GET: GSTINformations/Details/5
         public ActionResult Details(int? id)

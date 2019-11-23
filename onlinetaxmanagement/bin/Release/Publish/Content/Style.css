@@ -1,0 +1,323 @@
+﻿body, h1, h2, h3, h4, h5, h6, span, a, p, button {
+    display: inline;
+    line-height: 1.6;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    font-size: 10px;
+}
+@media (max-width:992px ) {
+    #hidden1 {
+        display: none;
+    }
+}
+#state {
+    background-color: rgba(116, 207, 121, 1);
+    width: 2px;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0%;
+    bottom: 0%;
+    right: 2%;
+    min-height: 7px;
+}
+.back {
+    background-position: relative;
+    background-position: center;
+    /**background-image:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url("backgrnd.jpg");**/
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    min-height: auto;
+    font-family: 'Changa',cursive;
+}
+.text-block {
+    position: absolute;
+    left: 5%;
+    top: 30%;
+    background-color: rgba(0, 0, 0, 0.37);
+    color: white;
+    padding: 4px 20px 50px 20px;
+}
+#imgbtn {
+    position: relative;
+}
+
+    #imgbtn button {
+        position: absolute;
+        left: 50%;
+        transform: translate( -50%, 0%);
+    }
+.my-bar span {
+    margin: 5% !important;
+}
+
+.my-top {
+    font-family: 'Changa',cursive;
+}
+
+.topnav .my-button {
+    padding: 11px 15px 11px 15px;
+    color: white;
+    margin-right: 5px;
+}
+
+.my-button:hover {
+    background-color: #8bc34a;
+    animation: mymove 0.7s 1;
+    color: black;
+}
+
+#navbar {
+    margin: 0px;
+    padding: 17px 20px 17px 05px;
+    z-index: 50;
+}
+
+.logo img {
+    line-height: 2.4;
+    margin-left: 4%;
+    width: 150px;
+    height: 100px;
+    padding-top: 5px;
+}
+
+.my-text-white,
+.my-hover-text-white:hover {
+    color: white !important
+}
+
+.my-bar {
+    width: 100%;
+    overflow: hidden;
+}
+
+.topnav {
+    font-size: 20px;
+    position: fixed;
+    background-color: #00001A;
+    z-index: 1;
+}
+
+
+.my-padding-32 {
+    padding-top: 32px !important;
+    padding-bottom: 32px !important
+}
+
+.catagories .my-third {
+    margin: 0% 10% 0% 10% !important;
+    width: 100%;
+}
+
+.content {
+    margin: 1% 2% 1% 4%;
+    width: 40%;
+    text-align: left;
+    padding-bottom: 10%;
+    font-family: 'Changa',cursive;
+}
+
+    .content .about {
+        font-size: 10px;
+    }
+
+.my-large {
+    font-size: 18px !important
+}
+
+.my-text-light-green,
+.my-hover-text-light-green:hover {
+    color: #8bc34a !important
+}
+
+body {
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+    background-color: #f4f4f4;
+}
+
+a {
+    color: #fff;
+    font-family: 'Changa',cursive;
+    font-size: 20px;
+}
+
+/* header */
+
+.header {
+    background-color: #00001A;
+    box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+    position: fixed;
+    width: 100%;
+    font-family: 'Marmelad',sans-serif;
+    z-index: 3;
+}
+
+    .header ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        overflow: hidden;
+        background-color: #00001A;
+    }
+
+    .header li a {
+        display: block;
+        padding: 20px 20px;
+        border-right: 1px solid #f4f4f4;
+        text-decoration: none;
+    }
+
+        .header li a:hover,
+        .header .menu-btn:hover {
+            background-color: green;
+        }
+
+    .header .logo {
+        display: block;
+        float: left;
+        font-size: 2em;
+        padding: 10px 20px;
+        text-decoration: none;
+    }
+
+    /* menu */
+
+    .header .menu {
+        clear: both;
+        max-height: 0;
+        transition: max-height .2s ease-out;
+    }
+
+    /* menu icon */
+
+    .header .menu-icon {
+        cursor: pointer;
+        display: inline-block;
+        padding: 28px 20px;
+        position: relative;
+        user-select: none;
+    }
+
+        .header .menu-icon .navicon {
+            background: #333;
+            display: block;
+            height: 2px;
+            position: relative;
+            transition: background .2s ease-out;
+            width: 18px;
+        }
+
+            .header .menu-icon .navicon:before,
+            .header .menu-icon .navicon:after {
+                background: #333;
+                content: '';
+                display: block;
+                height: 100%;
+                position: absolute;
+                transition: all .2s ease-out;
+                width: 100%;
+            }
+
+            .header .menu-icon .navicon:before {
+                top: 5px;
+            }
+
+            .header .menu-icon .navicon:after {
+                top: -5px;
+            }
+
+    /* menu btn */
+
+    .header .menu-btn {
+        display: none;
+    }
+
+        .header .menu-btn:checked ~ .menu {
+            max-height: 500px;
+        }
+
+        .header .menu-btn:checked ~ .menu-icon .navicon {
+            background: transparent;
+        }
+
+            .header .menu-btn:checked ~ .menu-icon .navicon:before {
+                transform: rotate(-45deg);
+            }
+
+            .header .menu-btn:checked ~ .menu-icon .navicon:after {
+                transform: rotate(45deg);
+            }
+
+        .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+        .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+            top: 0;
+        }
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+    .header li {
+        float: left;
+    }
+
+        .header li a {
+            padding: 20px 30px;
+        }
+
+    .header .menu {
+        clear: none;
+        float: right;
+        max-height: none;
+    }
+
+    .header .menu-icon {
+        display: none;
+    }
+}
+
+.myfooter {
+    background-color: rgba(0,0,0,0.8);
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Marmelad',sans-serif;
+    padding-top: 10%;
+    background-color: #00001a;
+}
+
+.my-animate-top {
+    position: relative;
+    animation: animatetop 1s
+}
+
+.my-bar .my-bar-item {
+    padding: 8px 16px;
+    float: left;
+    width: auto;
+    border: none;
+    display: block;
+    outline: 0
+}
+
+.my-bar .my-button {
+    white-space: normal
+}
+
+.my-right {
+    float: right !important
+}
+
+
+.my-left {
+    float: left !important
+}
+
+.right {
+    margin-right: 7%;
+}
+                

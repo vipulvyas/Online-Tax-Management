@@ -1,0 +1,296 @@
+﻿
+@{
+    ViewBag.Title = "Tax Calculator";
+}
+<script type="text/javascript">
+    function myFunction1() {
+        var taxpayer = $('#taxpayer').find(":selected").text();
+        $('#tptext').val(taxpayer);
+    }
+    function myFunction2() {
+        var status = $('#status').find(":selected").text();
+        $('#statustext').val(status);
+    }
+</script>
+<center class="mt-4"><h1 class="text-center shadow">Tax Calculator</h1></center>
+
+<center>
+    <fieldset style="border:5px solid green;margin:2% 30%;background-color:lightblue;border-radius:15px">
+
+        <div class="my-4">
+            @using (Html.BeginForm("ComputeTax", "TaxCal", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                
+                <div class="form-group">
+                    <h6> @Html.Label("Assessment Year", new { @class = " control-label" })</h6>
+                    <div class="col-md-10">
+                        @Html.DropDownList("year", new List<SelectListItem> {
+                            new SelectListItem {Text="2019-20",Value="2019-20" },
+                            new SelectListItem {Text="2018-19",Value="2018-19" },
+                            new SelectListItem {Text="2017-18",Value="2017-18" },
+                            new SelectListItem {Text="2016-17",Value="2016-17" },
+                            new SelectListItem {Text="2015-16",Value="2015-16" }
+                 }, "--Please Select One--",new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <h6>  @Html.Label("Tax Payer", new { @class = " control-label" })</h6>
+                    <div class="col-md-10">
+                        @Html.DropDownList("taxpayer", new List<SelectListItem> {
+                           new SelectListItem {Text="Residential Individual",Value="0" },
+                           new SelectListItem {Text="HUF",Value="1" },
+                           new SelectListItem {Text="AOPs/BOI",Value="2" },
+                           new SelectListItem {Text="Domestics Company",Value="3" },
+                           new SelectListItem {Text="Foreign Commpany",Value="4" },
+                           new SelectListItem {Text="Firms",Value="5" },
+                           new SelectListItem {Text="LLP",Value="6" },
+                           new SelectListItem {Text="Co-operative Society",Value="7" }
+                }, "--Please Select One--", new { @id = "taxpayer", @class = "form-control", onChange = "myFunction1(this)" })
+                        @Html.Hidden("tptext", new { @id = "tptext" })
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <h6>  @Html.Label("Male/Female/Senior Citizen ", new { @class = "control-label" })</h6>
+                    <div class="col-md-10">
+                        @Html.DropDownList("status", new List<SelectListItem> {
+                            new SelectListItem {Text="Male",Value="0" },
+                            new SelectListItem {Text="Female",Value="1" },
+                            new SelectListItem {Text="Senior Citizen",Value="2" },
+                            new SelectListItem {Text="Super Senior Citizen",Value="3" }
+                }, "--Please Select One--", new { @id = "status", @class = "form-control", onChange = "myFunction2(this)" })
+                        @Html.Hidden("statustext", new { @id = "statustext" })
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <h6> @Html.Label(" Net Taxable Income ", new { @class = "control-label" })</h6>
+                    <div class="col-md-10">
+                        @Html.TextBox("taxableincome", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn " style="background-color:green;color:white;font-size:larger;width:30%" value="Pay" />
+                    </div>
+                </div>
+            }
+
+        </div>
+        
+        <div>
+            @if (ViewBag.totaltax != null)
+            {
+                <hr />
+                <div class="form-group">
+                    <h6> @Html.Label(" Net Taxable Income ", new { @class = "control-label" })  :  @ViewBag.taxableincome</h6>
+                </div>
+                <div class="form-group">
+                    <h6>
+                        @Html.Label(" Income Tax After Relief ", new { @class = "control-label" })  :  @ViewBag.arincometax
+                    </h6>
+                </div>
+                <div class="form-group">
+                    <h6> @Html.Label(" Surcharge ", new { @class = "control-label" })  :  @ViewBag.surcharge</h6>
+                </div>
+                <div class="form-group">
+                    <h6> @Html.Label(" Education Cess ", new { @class = "control-label" })  :  @ViewBag.educationcess</h6>
+                </div>
+                <div class="form-group">
+                    <h6> @Html.Label(" Total Tax Liability ", new { @class = "control-label" })  :  @ViewBag.totaltax</h6>
+                </div>
+            }
+        </div>
+        </fieldset>
+        </center>
+<hr />
+        <main class="container-fluid text-justify">
+            <center><h1 class="text-center shadow"><strong>Tax Table</strong></h1></center>
+            <div class="my-4">
+                <h3 class="mb-4">Individuals or Hindu undivided family or association of persons or body of individuals [General Rate] </h3>
+                <h5 class="mt-4">Income Tax Rates for the Assessment Year 2020 - 2021</h5>
+                <table class="table table-striped table-bordered my-4">
+                    <tbody>
+                        <tr>
+                            <td><b> Sr. No.</b></td>
+                            <td><b> Tax Slab</b></td>
+                            <td><b> Rate</b></td>
+                            <td><b> Tax</b></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-weight: 400;">1</span></td>
+                            <td><span style="font-weight: 400;">Upto Rs. 250,000</span></td>
+                            <td><span style="font-weight: 400;">Nil</span></td>
+                            <td><span style="font-weight: 400;">Nil</span></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-weight: 400;">2</span></td>
+                            <td><span style="font-weight: 400;">From Rs. 250,001 To Rs. 500,000</span></td>
+                            <td><span style="font-weight: 400;">5%</span></td>
+                            <td><span style="font-weight: 400;">5 per cent of the amount by which the total income exceeds Rs. 250,000</span></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-weight: 400;">3</span></td>
+                            <td><span style="font-weight: 400;">From Rs. 500,001 To Rs. 1,000,000</span></td>
+                            <td><span style="font-weight: 400;">20%</span></td>
+                            <td><span style="font-weight: 400;">Rs. 12,500 plus 20 per cent of the amount by which the total income exceeds Rs. 500,000</span></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-weight: 400;">4</span></td>
+                            <td><span style="font-weight: 400;">From Rs. 1,000,001 and Above</span></td>
+                            <td><span style="font-weight: 400;">30%</span></td>
+                            <td><span style="font-weight: 400;">Rs. 112,500 plus 30 per cent of the amount by which the total income exceeds Rs. 1,000,000</span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="2"><span style="font-weight: 400;">Rebate - Upto Rs. 	2,500</span></td>
+                            <td><span style="font-weight: 400;">If total income is not exceeding Rs. 350,000</span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span style="font-weight: 400;">Surcharge</span></td>
+                            <td><span style="font-weight: 400;">10%</span></td>
+                            <td><span style="font-weight: 400;">If total income is exceeding Rs. 5,000,000 - with marginal relief</span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span style="font-weight: 400;">Surcharge</span></td>
+                            <td><span style="font-weight: 400;">15%</span></td>
+                            <td><span style="font-weight: 400;">If total income is exceeding Rs. 10,000,000 - with marginal relief</span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span style="font-weight: 400;">Education Cess</span></td>
+                            <td><span style="font-weight: 400;">4%</span></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr class="my-1" />
+            <hr class="my-1" />
+            <div class="my-4">
+                <h3 class="mb-4">Senior Citizens (Resident in India) who is of the age of 60 years or more during the previous / financial year </h3>
+                <h5 class="mt-4">Income Tax Rates for the Assessment Year 2020 - 2021</h5>
+                <table class="table table-striped table-bordered my-4">
+                    <tbody>
+                        <tr>
+                            <td><b> Sr. No.</b></td>
+                            <td><b> Tax Slab</b></td>
+                            <td><b> Rate</b></td>
+                            <td><b> Tax</b></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-weight: 400;">1</span></td>
+                            <td><span style="font-weight: 400;">Upto Rs. 300,000</span></td>
+                            <td><span style="font-weight: 400;">Nil</span></td>
+                            <td><span style="font-weight: 400;">Nil</span></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-weight: 400;">2</span></td>
+                            <td><span style="font-weight: 400;">From Rs. 300,001 To Rs. 500,000</span></td>
+                            <td><span style="font-weight: 400;">5%</span></td>
+                            <td><span style="font-weight: 400;">5 per cent of the amount by which the total income exceeds Rs. 300,000</span></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-weight: 400;">3</span></td>
+                            <td><span style="font-weight: 400;">From Rs. 500,001 To Rs. 1,000,000</span></td>
+                            <td><span style="font-weight: 400;">20%</span></td>
+                            <td><span style="font-weight: 400;">Rs. 10,000 plus 20 per cent of the amount by which the total income exceeds Rs. 500,000</span></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-weight: 400;">4</span></td>
+                            <td><span style="font-weight: 400;">From Rs. 1,000,001 and Above</span></td>
+                            <td><span style="font-weight: 400;">30%</span></td>
+                            <td><span style="font-weight: 400;">Rs. 110,000 plus 30 per cent of the amount by which the total income exceeds Rs. 1,000,000</span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="2"><span style="font-weight: 400;">Rebate - Upto Rs. 	2,500</span></td>
+                            <td><span style="font-weight: 400;">If total income is not exceeding Rs. 350,000</span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span style="font-weight: 400;">Surcharge</span></td>
+                            <td><span style="font-weight: 400;">10%</span></td>
+                            <td><span style="font-weight: 400;">If total income is exceeding Rs. 5,000,000 - with marginal relief</span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span style="font-weight: 400;">Surcharge</span></td>
+                            <td><span style="font-weight: 400;">15%</span></td>
+                            <td><span style="font-weight: 400;">If total income is exceeding Rs. 10,000,000 - with marginal relief</span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span style="font-weight: 400;">Education Cess</span></td>
+                            <td><span style="font-weight: 400;">4%</span></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr class="my-1 " />
+            <hr class="my-1" />
+            <div class="my-4">
+                <h3 class="mb-4">Super Senior Citizens (Resident in India) who is of the age of 80 years or more during the previous / financial year </h3>
+                <h5 class="mt-4">Income Tax Rates for the Assessment Year 2020 - 2021</h5>
+                <table class="table table-bordered table-striped my-4">
+                    <tbody>
+                        <tr>
+                            <td><b> Sr. No.</b></td>
+                            <td><b> Tax Slab</b></td>
+                            <td><b> Rate</b></td>
+                            <td><b> Tax</b></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-weight: 400;">1</span></td>
+                            <td><span style="font-weight: 400;">Upto Rs. 500,000</span></td>
+                            <td><span style="font-weight: 400;">Nil</span></td>
+                            <td><span style="font-weight: 400;">Nil</span></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-weight: 400;">2</span></td>
+                            <td><span style="font-weight: 400;">From Rs. 500,001 To Rs. 1,000,000</span></td>
+                            <td><span style="font-weight: 400;">20%</span></td>
+                            <td><span style="font-weight: 400;">20 per cent of the amount by which the total income exceeds Rs. 500,000</span></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-weight: 400;">3</span></td>
+                            <td><span style="font-weight: 400;">From Rs. 1,000,001 and Above</span></td>
+                            <td><span style="font-weight: 400;">30%</span></td>
+                            <td><span style="font-weight: 400;">Rs. 100,000 plus 30 per cent of the amount by which the total income exceeds Rs. 1,000,000</span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="2"><span style="font-weight: 400;">Rebate - Upto Rs. 	2,500</span></td>
+                            <td><span style="font-weight: 400;">If total income is not exceeding Rs. 350,000</span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span style="font-weight: 400;">Surcharge</span></td>
+                            <td><span style="font-weight: 400;">10%</span></td>
+                            <td><span style="font-weight: 400;">If total income is exceeding Rs. 5,000,000 - with marginal relief</span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span style="font-weight: 400;">Surcharge</span></td>
+                            <td><span style="font-weight: 400;">15%</span></td>
+                            <td><span style="font-weight: 400;">If total income is exceeding Rs. 10,000,000 - with marginal relief</span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span style="font-weight: 400;">Education Cess</span></td>
+                            <td><span style="font-weight: 400;">4%</span></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </main>
+

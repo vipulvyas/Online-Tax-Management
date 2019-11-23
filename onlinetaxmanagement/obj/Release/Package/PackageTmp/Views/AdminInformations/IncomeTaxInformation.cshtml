@@ -1,0 +1,76 @@
+﻿@model IEnumerable<onlinetaxmanagement.Models.TaxInformation>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div style=" margin:2%">
+<center><h2>Income Tax Information</h2></center>
+</div>
+
+<table class="table  table-bordered table-striped"  >
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalIncome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalTax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Registration.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Registration.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Registration.PanNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Registration.MobileNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Registration.Email)
+        </th>
+        
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Year)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Status)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TotalIncome)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TotalTax)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Registration.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Registration.LastName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Registration.PanNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Registration.MobileNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Registration.Email)
+    </td>
+
+</tr>
+    }
+
+</table>

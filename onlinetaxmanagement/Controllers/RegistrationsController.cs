@@ -46,9 +46,28 @@ namespace onlinetaxmanagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Uid,FirstName,LastName,PanNumber,MobileNumber,Email, Password,BankName,AccountNumber,IFSC,Flag")] Registration registration)
+        public ActionResult Create([Bind(Include = "Uid,FirstName,LastName,PanNumber,MobileNumber,Email, Password,BankName,AccountNumber,IFSC")] Registration registration)
         {
-           
+            string pannumber =  registration.PanNumber;
+            if(registration.Password != Request["cpassword"])
+            {
+                ViewBag.Message2 = "The password and confirmation password do not match.";
+                return View(registration);
+            }
+            if (pannumber != null)
+            {
+                var data = db.PanCardDetails.Where(m => m.PanNumber.Equals(pannumber)).FirstOrDefault();
+                if (data == null)
+                {
+                    ViewBag.Message = "PanCard is Not Exist Try Another One.";
+                    return View(registration);
+                }
+                if (data.MobileNumber != registration.MobileNumber)
+                {
+                    ViewBag.Message1 = "Mobile Number Does Not Match With Pan Card!";
+                    return View(registration);
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Registrations.Add(registration);

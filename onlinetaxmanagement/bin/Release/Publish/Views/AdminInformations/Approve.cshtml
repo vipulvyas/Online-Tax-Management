@@ -1,0 +1,67 @@
+﻿@model IEnumerable<onlinetaxmanagement.Models.GSTNumber>
+
+@{
+    ViewBag.Title = "Approve";
+}
+
+<center style="margin:2% 0%"><h2 >Approve GST Number Request</h2></center>
+
+
+<table class="table  table-bordered table-striped">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Registration.PanNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Registration.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Registration.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Registration.MobileNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Registration.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    @if (item.GSTNumber1 == null)
+    {
+        using (Html.BeginForm("Approval", "AdminInformations", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Registration.PanNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Registration.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Registration.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Registration.MobileNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Registration.Email)
+            </td>
+            @Html.HiddenFor(model => item.Uid, new { Value = item.Uid })
+            @Html.HiddenFor(model => item.Registration.Email, new { Value = item.Registration.Email })
+
+            <td>
+                <input type="submit" class="btn" style="background-color:lightblue;color:blue;" value="Approve" />
+            </td>
+
+        }
+    }
+</tr>
+}
+
+</table>

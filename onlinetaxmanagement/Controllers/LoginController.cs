@@ -25,8 +25,6 @@ namespace onlinetaxmanagement.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(Registration reg)
         {
-            if (ModelState.IsValid)
-            {
                 using (TaxSystemEntities1 db = new TaxSystemEntities1())
                 {
                     var obj = db.Registrations.Where(a => a.PanNumber.Equals(reg.PanNumber) && a.Password.Equals(reg.Password)).FirstOrDefault();
@@ -34,10 +32,10 @@ namespace onlinetaxmanagement.Controllers
                     {
                         Session["PanNumber"] = obj.PanNumber.ToString();
                         Session["Uid"] = Convert.ToInt32(obj.Uid);
+                    Session["Username"] = obj.FirstName.ToString() + " " + obj.LastName.ToString(); ;
                         return RedirectToAction("Index", "Home");
                     }
                 }
-            }
             ViewBag.Message = "Invalid Pan Number or Password";
            // Response.Write("<script>alert(' Invalid PanNumber or Password')</script>");
             return View(reg);

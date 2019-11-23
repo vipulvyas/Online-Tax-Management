@@ -1,0 +1,113 @@
+﻿@model IEnumerable<onlinetaxmanagement.Models.GSTINformation>
+
+@{
+    ViewBag.Title = "DGSTbill";
+}
+@{ decimal total = 0;}
+<h3><center style="margin-top:2%;"> Remaining Bills</center></h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    var temp = 0;
+    foreach (var item in Model)
+    {
+        if (item.Flag == 1)
+        {
+            temp = 1;
+        }
+    }
+    if (temp == 1)
+    {
+        <table class="table  table-bordered table-striped">
+            <tr>
+                <th style="margin-left:10%">
+                    @Html.DisplayNameFor(model => model.MRP)
+                </th>
+                <th style="margin-left:25%">
+                    @Html.DisplayNameFor(model => model.GST)
+                </th>
+                <th style="margin-left:47%">
+                    @Html.DisplayNameFor(model => model.Bill)
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                if (item.Flag == 1)
+                {
+                    <tr>
+                        <td style="margin-left:10%">
+                            @Html.DisplayFor(modelItem => item.MRP)
+                        </td>
+                        <td style="margin-left:25%">
+                            @Html.DisplayFor(modelItem => item.GST)
+
+                            @{total = total + Convert.ToDecimal(item.GST);}
+
+                        </td>
+                        <td style="margin-left:30%">
+                            <img src="~/UploadedFiles/@item.Bill" style="height:30%;width:65%;" alt="@item.Bill">
+                        </td>
+                    </tr>
+                }
+            }
+            @{ Session["Total"] = total;}
+            <center style="margin: 2% 0%;">
+                <h5>Total Gst Amount: @total</h5>
+                <button class="btn" style="background-color:lightblue;">@Html.ActionLink("Send Refund", "Sendrefund", "AdminInformations")</button>
+            </center>
+        </table>
+    }
+
+}
+
+<h3><center style="margin-top:2%;"> Refunded Bills</center></h3>
+      @{ var temp1 = 0;
+          foreach (var item in Model)
+          {
+              if (item.Flag == 0)
+              {
+                  temp1 = 1;
+              }
+          }
+          if (temp1 == 1)
+          {
+
+
+<table class="table">
+    <tr>
+        <th style="margin-left:10%">
+            @Html.DisplayNameFor(model => model.MRP)
+        </th>
+        <th style="margin-left:25%">
+            @Html.DisplayNameFor(model => model.GST)
+        </th>
+        <th style="margin-left:47%">
+            @Html.DisplayNameFor(model => model.Bill)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.Flag == 0)
+        {
+            <tr>
+                <td style="margin-left:10%">
+                    @Html.DisplayFor(modelItem => item.MRP)
+                </td>
+                <td style="margin-left:25%">
+                    @Html.DisplayFor(modelItem => item.GST)
+                </td>
+                <td style="margin-left:30%">
+                    <img src="~/UploadedFiles/@item.Bill" style="height:30%;width:65%;" alt="@item.Bill">
+                </td>
+            </tr>
+        }
+    }
+</table>
+              }
+
+          }
