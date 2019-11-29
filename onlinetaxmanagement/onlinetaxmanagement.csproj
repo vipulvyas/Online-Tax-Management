@@ -346,7 +346,7 @@
     <Content Include="Models\Tax.edmx.diagram">
       <DependentUpon>Tax.edmx</DependentUpon>
     </Content>
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\OnlineTaxbazar - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -411,6 +411,7 @@
     <Content Include="Views\AdminInformations\Approve.cshtml" />
     <Content Include="Views\TaxInformations\History.cshtml" />
     <Content Include="Views\GSTINformations\EnterGST.cshtml" />
+    <Content Include="Views\Home\Security.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="TaxSystemEntities1-Web.config Connection String" description="TaxSystemEntities1 Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.Tax.csdl|res://*/Models.Tax.ssdl|res://*/Models.Tax.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=(LocalDB)\MSSQLLocalDB;initial catalog=TaxSystem;integrated security=True;pooling=False;multipleactiveresultsets=True;application name=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\vipul\\source\\repos\\onlinetaxmanagement\\onlinetaxmanagement\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='TaxSystemEntities1']/@connectionString" />
+  </parameter>
+</parameters>

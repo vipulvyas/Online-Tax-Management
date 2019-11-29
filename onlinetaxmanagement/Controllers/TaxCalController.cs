@@ -182,17 +182,20 @@ namespace TaxApp.Controllers
                 educationcess = arincometax * 4 / 100;
                 totaltax = arincometax + surcharge + educationcess;
             }
-            using (TaxSystemEntities1 db = new TaxSystemEntities1())
+            if (totaltax <= 250000)
             {
-                if (ModelState.IsValid)
+                using (TaxSystemEntities1 db = new TaxSystemEntities1())
                 {
-                    taxinfo.TotalIncome = taxableincome;
-                    taxinfo.Status = status;
-                    taxinfo.TotalTax = totaltax;
-                    taxinfo.Year = year;
-                    taxinfo.Uid = Convert.ToInt32(Session["Uid"]);
-                    db.TaxInformations.Add(taxinfo);
-                    db.SaveChanges();
+                    if (ModelState.IsValid)
+                    {
+                        taxinfo.TotalIncome = taxableincome;
+                        taxinfo.Status = status;
+                        taxinfo.TotalTax = totaltax;
+                        taxinfo.Year = year;
+                        taxinfo.Uid = Convert.ToInt32(Session["Uid"]);
+                        db.TaxInformations.Add(taxinfo);
+                        db.SaveChanges();
+                    }
                 }
             }
             ViewBag.arincometax = arincometax;
@@ -200,6 +203,7 @@ namespace TaxApp.Controllers
             ViewBag.surcharge = surcharge;
             ViewBag.educationcess = educationcess;
             ViewBag.totaltax = totaltax;
+            ModelState.Clear();
             return View("Index");
         }
 

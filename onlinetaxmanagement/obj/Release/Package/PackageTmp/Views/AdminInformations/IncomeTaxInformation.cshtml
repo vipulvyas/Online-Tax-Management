@@ -3,74 +3,100 @@
 @{
     ViewBag.Title = "Index";
 }
-<div style=" margin:2%">
-<center><h2>Income Tax Information</h2></center>
-</div>
 
-<table class="table  table-bordered table-striped"  >
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Year)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalIncome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalTax)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Registration.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Registration.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Registration.PanNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Registration.MobileNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Registration.Email)
-        </th>
-        
-    </tr>
 
-    @foreach (var item in Model)
-    {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Year)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Status)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.TotalIncome)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.TotalTax)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Registration.FirstName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Registration.LastName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Registration.PanNumber)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Registration.MobileNumber)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Registration.Email)
-    </td>
 
-</tr>
-    }
+@using (Html.BeginForm("IncomeTaxInformation", "AdminInformations", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
 
-</table>
+    <center>
+        <fieldset style="margin:2% 25%;background-color:darkgrey;border:5px solid black;border-radius:10px">
+            <h4><center style="margin:2% 0%;"> Enter Pan Number</center></h4>
+            <br>
+            @Html.TextBox("PanNumber", "", new { type = "text", Style = "border:2px solid ;border-radius:5px" })
+            <br>
+            <br>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-dark" value="Submit" />
+                </div>
+            </div>
+        </fieldset>
+    </center>
+}
+
+
+    <div style=" margin:2%">
+        <center><h2>Income Tax Information</h2></center>
+    </div>
+    <div style="overflow-x:auto">
+
+        <table class="table  table-bordered table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Year)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalIncome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalTax)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Registration.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Registration.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Registration.PanNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Registration.MobileNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Registration.Email)
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Year)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalIncome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalTax)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Registration.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Registration.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Registration.PanNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Registration.MobileNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Registration.Email)
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+        </div>

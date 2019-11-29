@@ -203,6 +203,40 @@ namespace onlinetaxmanagement.Controllers
             }
            
         }
+        [HttpPost]
+        public ActionResult IncomeTaxInformation(TaxInformation taxInformation)
+        {
+            if (Session["Admin"] != null)
+            {
+                var pannumber = Request["PanNumber"].ToString();
+                if (pannumber!="")
+                {
+                    var data = db.Registrations.Where(m => m.PanNumber.Equals(pannumber)).FirstOrDefault();
+                    if(data==null)
+                    {
+                        var taxInformations = db.TaxInformations.Include(t => t.Registration);
+                        return View(taxInformations.ToList());
+                    }
+                    else
+                    { 
+                        var uid = data.Uid;
+                        var taxInformations = db.TaxInformations.Where(m => m.Uid.Equals(uid)).Include(t => t.Registration);
+                        return View(taxInformations.ToList());
+                    }
+
+                }
+                else
+                {
+                    var taxInformations = db.TaxInformations.Include(t => t.Registration);
+                    return View(taxInformations.ToList());
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "AdminInformations");
+            }
+
+        }
         public ActionResult Approve()
         {
             if (Session["Admin"] != null)
