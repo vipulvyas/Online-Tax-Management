@@ -35,28 +35,17 @@
 		- SQL Injection
 		- Cross Side Scripting(xss)
 		- Cross Side Request Forgery(CSRF)
-		- Break Authentication
+		- Secure Authentication Authentication
 			
 # Contributors:
-		1.Keval Talaviya
+		1.Vipul Vyas
+		   email: vipulvyas0813@gmail.com
 		   
-		   Roll no: CE133
-		   Identity no: 17CEUOS077
+		2.Keval Talaviya
 		   email: kevaltalaviya122@gmail.com
 		   
-		2.Shubham Vekariya
-
-		   Roll no: CE145
-		   Identity no: 17CEUOS111
+		3.Shubham Vekariya
 		   email: shubhamvekariya402@gmail.com
 
-		3.Vipul Vyas
-		  
-		   Roll no: CE146
-		   Identity no: 17CEUBG009
-		   email: vipulvyas0813@gmail.com
+		
 
-
-# Guidance By:
-		Prof. Apurva M. Mehta
-		Prof. Jatayu H. Baxi
