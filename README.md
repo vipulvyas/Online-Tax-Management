@@ -8,6 +8,8 @@
 			 
 # Technologies: 
 		HTML5, CSS3, Bootstrap4, Javascript, Jquery, ASP.NET MVC 5 with C#.
+# Requirment:
+		Visual Studio 2019
 
 # Start of Project: 
 		1.This is Database First Approch, So First Perform Migration Steps to get Database Ready.
